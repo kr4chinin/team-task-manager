@@ -1,0 +1,35 @@
+@import '../../assets/fonts/ABeeZee/ABeeZee.css';
+
+.container {
+    position: fixed;
+    font-family: 'ABeeZee', sans-serif;
+    height: 130px;
+    width: 100vw;
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3E4491;
+}
+
+.container p {
+    color: white;
+    font-size: 42px;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 130px;
+    min-width: 420px;
+}
+
+.links p {
+    font-size: 30px;
+}
+
+
+
+
+

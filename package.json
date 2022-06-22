@@ -43,6 +43,7 @@
 		]
 	},
 	"devDependencies": {
-		"prettier": "2.7.1"
+		"prettier": "2.7.1",
+		"typescript-plugin-css-modules": "^3.4.0"
 	}
 }
