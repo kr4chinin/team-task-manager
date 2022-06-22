@@ -2,7 +2,7 @@
 
 .container {
     font-family: 'Comic Neue', sans-serif;
-    width: 650px;
+    width: 680px;
     height: 150px;
     background-color: #2B63D0;
     margin: 8px;
@@ -19,7 +19,8 @@
 }
 
 .user-info {
-    margin-right: 90px;
+    width: 300px;
+    word-break: normal;
 }
 
 #name {

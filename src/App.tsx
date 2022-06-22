@@ -1,6 +1,7 @@
 import ActionPanel from "./components/action-panel/ActionPanel"
 import Navbar from "./components/navbar/Navbar"
-import UserItem from "./components/user/UserItem"
+import TaskListPage from "./components/tasks/TaskListPage"
+import UserListPage from "./components/users/UserListPage"
 import './styles/App.css'
 
 function App() {
@@ -9,20 +10,8 @@ function App() {
 			<Navbar />
 			<div className='content-container'>
 				<ActionPanel />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
-				<UserItem />
+				<UserListPage />
+				<TaskListPage />
 			</div>
 		</div>
 	)
