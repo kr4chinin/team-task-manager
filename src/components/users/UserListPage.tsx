@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import List from '../List'
 import UserItem from './UserItem'
@@ -10,19 +9,21 @@ import Loader from '../loader/Loader'
 
 const UserListPage = () => {
 	const [users, setUsers] = useState<IUser[]>([])
-    const [isLoading, setIsLoading] = useState(false)
 
 	const navigate = useNavigate()
 
-    const {execute, loading} = useFetching<IUser>('https://jsonplaceholder.typicode.com/users', setUsers)
+	const { execute, loading } = useFetching<IUser>(
+		'https://jsonplaceholder.typicode.com/users',
+		setUsers
+	)
 
 	useEffect(() => {
 		execute()
-	}, [])
+	}, [execute])
 
-    if (loading) {
-        return <Loader />
-    }
+	if (loading) {
+		return <Loader />
+	}
 
 	return (
 		<>

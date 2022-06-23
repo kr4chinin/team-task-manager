@@ -15,15 +15,18 @@ const TaskListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])
 	const params = useParams<UserTasksParams>()
 
-    const {execute, loading} = useFetching<ITask>(`https://jsonplaceholder.typicode.com/todos?userId=${params.id}`, setTasks)
+	const { execute, loading } = useFetching<ITask>(
+		`https://jsonplaceholder.typicode.com/todos?userId=${params.id}`,
+		setTasks
+	)
 
 	useEffect(() => {
 		execute()
-	}, [params.id])
+	}, [execute])
 
-    if (loading) {
-        return <Loader />
-    }
+	if (loading) {
+		return <Loader />
+	}
 
 	return (
 		<>
