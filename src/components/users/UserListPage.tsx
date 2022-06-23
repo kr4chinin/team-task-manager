@@ -5,6 +5,7 @@ import UserItem from './UserItem'
 import { IUser } from '../../interfaces'
 import ActionPanel from '../action-panel/ActionPanel'
 import { useNavigate } from 'react-router-dom'
+import { useFetching } from '../../hooks/useFetching'
 import Loader from '../loader/Loader'
 
 const UserListPage = () => {
@@ -13,20 +14,13 @@ const UserListPage = () => {
 
 	const navigate = useNavigate()
 
-	async function fetchUsers() {
-        setIsLoading(true)
-		const response = await axios.get(
-			'https://jsonplaceholder.typicode.com/users'
-		)
-        setIsLoading(false)
-		setUsers(response.data)
-	}
+    const {execute, loading} = useFetching<IUser>('https://jsonplaceholder.typicode.com/users', setUsers)
 
 	useEffect(() => {
-		fetchUsers()
+		execute()
 	}, [])
 
-    if (isLoading) {
+    if (loading) {
         return <Loader />
     }
 
