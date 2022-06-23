@@ -1,39 +1,39 @@
 @import '../../../assets/fonts/ComicNeue/ComicNeue.css';
 
 .container {
-    font-family: 'Comic Neue', sans-serif;
-    width: 680px;
-    height: 150px;
-    background-color: #2B63D0;
-    margin: 8px;
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
+	font-family: 'Comic Neue', sans-serif;
+	width: 680px;
+	height: 150px;
+	background-color: #2b63d0;
+	margin: 8px;
+	padding: 1em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: bold;
 }
 
 #indicator {
-    font-size: 32px;
+	font-size: 32px;
 }
 
 #title {
-    color: white;
-    font-size: 32px;
-    width: 500px;
+	color: white;
+	font-size: 32px;
+	width: 500px;
 }
 
 .btn-container {
-    display: flex;
-    justify-content: space-between;
-    width: 70px;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	width: 70px;
+	align-items: center;
 }
 
 #completeBtn {
-    font-size: 32px;
+	font-size: 32px;
 }
 
 #deleteBtn {
-    font-size: 30px;
+	font-size: 30px;
 }

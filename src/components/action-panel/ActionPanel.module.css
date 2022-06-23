@@ -1,17 +1,17 @@
 .container {
-    height: 100px;
-    width: 580px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.8rem;
-    margin-bottom: 37px;
+	height: 100px;
+	width: 580px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1.8rem;
+	margin-bottom: 37px;
 }
 
 .search-sort-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 250px;
-    height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 250px;
+	height: 100px;
 }

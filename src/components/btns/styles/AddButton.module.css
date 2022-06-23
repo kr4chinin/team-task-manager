@@ -1,14 +1,14 @@
 @import '../../../assets/fonts/ComicNeue/ComicNeue.css';
 
 .add-btn {
-    font-family: 'Comic Neue', sans-serif;
-    font-weight: bold;
-    font-size: 34px;
-    width: 250px;
-    height: 100px;
-    background-color: #3A9EFD;
-    color: white;
-    border: transparent;
-    border-radius: 0.5em;
-    cursor: pointer;
+	font-family: 'Comic Neue', sans-serif;
+	font-weight: bold;
+	font-size: 34px;
+	width: 250px;
+	height: 100px;
+	background-color: #3a9efd;
+	color: white;
+	border: transparent;
+	border-radius: 0.5em;
+	cursor: pointer;
 }
