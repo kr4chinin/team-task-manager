@@ -1,24 +1,33 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import { ITask } from "../../interfaces"
+import ActionPanel from "../action-panel/ActionPanel"
 import List from "../List"
 import TaskItem from "./TaskItem"
 
-const TaskListPage = () => {
+type UserTasksParams = {
+    id: string
+}
+
+const TaskListPage: FC = () => {
 
     const [tasks, setTasks] = useState<ITask[]>([])
 
-    async function fetchTasks() {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/todos')
-        setTasks(response.data)
-    }
+    const params = useParams<UserTasksParams>()
 
     useEffect(() => {
         fetchTasks()
-    }, [])
+    }, [params.id])
+
+    async function fetchTasks() {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${params.id}`)
+        setTasks(response.data)
+    }
 
     return (
-        <div>
+        <>
+            <ActionPanel />
             <List 
                 items={tasks}
                 renderItem={(task: ITask) =>
@@ -27,7 +36,7 @@ const TaskListPage = () => {
                     </div>
                 }
             />
-        </div>
+        </>
     )
 }
 

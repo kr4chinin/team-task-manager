@@ -12,9 +12,10 @@
     background-color: #3E4491;
 }
 
-.container p {
+.container a {
     color: white;
     font-size: 42px;
+    text-decoration: none;
 }
 
 .links {
@@ -25,7 +26,7 @@
     min-width: 420px;
 }
 
-.links p {
+.links a {
     font-size: 30px;
 }
 

@@ -1,14 +1,15 @@
+import { Link } from 'react-router-dom'
 import cl from './Navbar.module.css'
 
 const Navbar = () => {
     return (
-        <div className={cl.container}>
-            <p>📝 Team Task Manager</p>
+        <nav className={cl.container}>
+            <Link to='/'>📝 Team Task Manager</Link>
             <div className={cl.links}>
-                <p id={cl['first-link']}>📊 Users List</p>
-                <p>ℹ️ Information</p>
+                <Link to='/' id={cl['first-link']}>📊 Users List</Link>
+                <Link to='info'>ℹ️ Information</Link>
             </div>
-        </div>
+        </nav>
     )
 }
 

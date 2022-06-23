@@ -1,19 +1,16 @@
-import ActionPanel from "./components/action-panel/ActionPanel"
 import Navbar from "./components/navbar/Navbar"
-import TaskListPage from "./components/tasks/TaskListPage"
-import UserListPage from "./components/users/UserListPage"
 import './styles/App.css'
+import { BrowserRouter } from "react-router-dom"
+import AppRoutes from "./components/AppRoutes"
 
 function App() {
 	return (
-		<div className="App">
+		<BrowserRouter>
 			<Navbar />
 			<div className='content-container'>
-				<ActionPanel />
-				<UserListPage />
-				<TaskListPage />
+				<AppRoutes />
 			</div>
-		</div>
+		</BrowserRouter>
 	)
 }
 
