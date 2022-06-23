@@ -10,12 +10,13 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	cursor: pointer;
 }
 
 .avatar {
 	width: 120px;
 	height: 120px;
-	background-color: bisque;
+	border: 3px solid white;
 }
 
 .user-info {
