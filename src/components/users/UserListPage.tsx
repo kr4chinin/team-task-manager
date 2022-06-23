@@ -6,13 +6,14 @@ import ActionPanel from '../action-panel/ActionPanel'
 import { useNavigate } from 'react-router-dom'
 import { useFetching } from '../../hooks/useFetching'
 import Loader from '../loader/Loader'
+import Error from '../error/Error'
 
 const UserListPage = () => {
 	const [users, setUsers] = useState<IUser[]>([])
 
 	const navigate = useNavigate()
 
-	const { execute, loading } = useFetching<IUser>(
+	const { execute, status } = useFetching<IUser>(
 		'https://jsonplaceholder.typicode.com/users',
 		setUsers
 	)
@@ -21,13 +22,11 @@ const UserListPage = () => {
 		execute()
 	}, [execute])
 
-	if (loading) {
-		return <Loader />
-	}
-
 	return (
 		<>
 			<ActionPanel />
+            {status === 'loading' ? <Loader /> : null}
+            {status === 'error' ? <Error /> : null}
 			<List
 				items={users}
 				renderItem={(user: IUser) => (

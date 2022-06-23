@@ -6,6 +6,7 @@ import ActionPanel from '../action-panel/ActionPanel'
 import List from '../List'
 import TaskItem from './TaskItem'
 import Loader from '../loader/Loader'
+import Error from '../error/Error'
 
 type UserTasksParams = {
 	id: string
@@ -15,7 +16,7 @@ const TaskListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])
 	const params = useParams<UserTasksParams>()
 
-	const { execute, loading } = useFetching<ITask>(
+	const { execute, status } = useFetching<ITask>(
 		`https://jsonplaceholder.typicode.com/todos?userId=${params.id}`,
 		setTasks
 	)
@@ -24,13 +25,11 @@ const TaskListPage: FC = () => {
 		execute()
 	}, [execute])
 
-	if (loading) {
-		return <Loader />
-	}
-
 	return (
 		<>
 			<ActionPanel />
+            {status === 'loading' ? <Loader /> : null}
+            {status === 'error' ? <Error /> : null}
 			<List
 				items={tasks}
 				renderItem={(task: ITask) => (
