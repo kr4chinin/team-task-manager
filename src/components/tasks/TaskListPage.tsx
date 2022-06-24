@@ -13,7 +13,10 @@ type UserTasksParams = {
 }
 
 const TaskListPage: FC = () => {
+	
 	const [tasks, setTasks] = useState<ITask[]>([])
+	const [sortedTasks, setSortedTasks] = useState<ITask[]>([])
+
 	const params = useParams<UserTasksParams>()
 
 	const { execute, status } = useFetching<ITask>(
@@ -27,11 +30,11 @@ const TaskListPage: FC = () => {
 
 	return (
 		<>
-			<ActionPanel />
+			<ActionPanel items={tasks} setItems={setSortedTasks} searchBy='title'/>
             {status === 'loading' ? <Loader /> : null}
             {status === 'error' ? <Error /> : null}
 			<List
-				items={tasks}
+				items={sortedTasks}
 				renderItem={(task: ITask) => (
 					<div key={task.id}>
 						<TaskItem task={task} />
