@@ -9,8 +9,7 @@ interface UserItemProps {
 }
 
 const UserItem: FC<UserItemProps> = ({ user, filter }) => {
-
-	const light = (str: any) => {
+	const light = (str: string) => {
 		return <Highlight filter={filter} str={str} />
 	}
 

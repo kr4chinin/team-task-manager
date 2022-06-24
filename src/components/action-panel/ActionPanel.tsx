@@ -24,7 +24,12 @@ function ActionPanel<T>({
 		<div className={cl.container}>
 			<AddButton title={btnTitle} />
 			<div className={cl['search-sort-container']}>
-				<SearchBar items={items} setItems={setItems} searchBy={searchBy} setFilter={setFilter}/>
+				<SearchBar
+					items={items}
+					setItems={setItems}
+					searchBy={searchBy}
+					setFilter={setFilter}
+				/>
 				<SortBar items={items} setItems={setItems} options={options} />
 			</div>
 		</div>

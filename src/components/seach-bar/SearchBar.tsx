@@ -8,7 +8,12 @@ interface SearchBarProps<T> {
 	setFilter: (filter: string) => void
 }
 
-function SearchBar<T>({ items, setItems, searchBy, setFilter }: SearchBarProps<T>) {
+function SearchBar<T>({
+	items,
+	setItems,
+	searchBy,
+	setFilter
+}: SearchBarProps<T>) {
 	const [value, setValue] = useState<string>('')
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

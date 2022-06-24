@@ -9,8 +9,7 @@ interface TaskItemProps {
 }
 
 const TaskItem: FC<TaskItemProps> = ({ task, filter }) => {
-
-	const light = (str: any) => {
+	const light = (str: string) => {
 		return <Highlight filter={filter} str={str} />
 	}
 

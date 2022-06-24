@@ -15,7 +15,7 @@ type UserTasksParams = {
 const TaskListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])
 	const [sortedTasks, setSortedTasks] = useState<ITask[]>([])
-	const [filter, setFilter] = useState<string>('')
+	const [filter, setFilter] = useState('')
 
 	const params = useParams<UserTasksParams>()
 
