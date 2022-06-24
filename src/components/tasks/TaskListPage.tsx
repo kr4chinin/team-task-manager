@@ -13,7 +13,6 @@ type UserTasksParams = {
 }
 
 const TaskListPage: FC = () => {
-	
 	const [tasks, setTasks] = useState<ITask[]>([])
 	const [sortedTasks, setSortedTasks] = useState<ITask[]>([])
 
@@ -30,9 +29,15 @@ const TaskListPage: FC = () => {
 
 	return (
 		<>
-			<ActionPanel items={tasks} setItems={setSortedTasks} searchBy='title'/>
-            {status === 'loading' ? <Loader /> : null}
-            {status === 'error' ? <Error /> : null}
+			<ActionPanel
+				options={['title', 'completed']}
+				btnTitle="Add task"
+				items={tasks}
+				setItems={setSortedTasks}
+				searchBy="title"
+			/>
+			{status === 'loading' ? <Loader /> : null}
+			{status === 'error' ? <Error /> : null}
 			<List
 				items={sortedTasks}
 				renderItem={(task: ITask) => (

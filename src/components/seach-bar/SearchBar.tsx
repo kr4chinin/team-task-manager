@@ -7,8 +7,7 @@ interface SearchBarProps<T> {
 	searchBy: keyof T
 }
 
-function SearchBar<T>({items, setItems, searchBy}: SearchBarProps<T>) {
-
+function SearchBar<T>({ items, setItems, searchBy }: SearchBarProps<T>) {
 	const [value, setValue] = useState<string>('')
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -16,15 +15,16 @@ function SearchBar<T>({items, setItems, searchBy}: SearchBarProps<T>) {
 	}
 
 	useEffect(() => {
-		setItems(items.filter((item: T) => {
-			const query = item[searchBy]
-			if (typeof query === 'string') {
-				return query.toLowerCase().includes(value.toLowerCase())
-			} else {
-				return false
-			}
-		}
-		))
+		setItems(
+			items.filter((item: T) => {
+				const query = item[searchBy]
+				if (typeof query === 'string') {
+					return query.toLowerCase().includes(value.toLowerCase())
+				} else {
+					return false
+				}
+			})
+		)
 	}, [value, items, searchBy, setItems])
 
 	return <input value={value} onChange={handleChange} placeholder="Search..." />

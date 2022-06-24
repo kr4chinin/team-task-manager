@@ -25,9 +25,15 @@ const UserListPage = () => {
 
 	return (
 		<>
-			<ActionPanel items={users} setItems={setSortedUsers} searchBy='name'/>
-            {status === 'loading' ? <Loader /> : null}
-            {status === 'error' ? <Error /> : null}
+			<ActionPanel
+				options={['name', 'email']}
+				btnTitle="Add user"
+				items={users}
+				setItems={setSortedUsers}
+				searchBy="name"
+			/>
+			{status === 'loading' ? <Loader /> : null}
+			{status === 'error' ? <Error /> : null}
 			<List
 				items={sortedUsers}
 				renderItem={(user: IUser) => (
