@@ -15,6 +15,7 @@ type UserTasksParams = {
 const TaskListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])
 	const [sortedTasks, setSortedTasks] = useState<ITask[]>([])
+	const [filter, setFilter] = useState<string>('')
 
 	const params = useParams<UserTasksParams>()
 
@@ -35,6 +36,7 @@ const TaskListPage: FC = () => {
 				items={tasks}
 				setItems={setSortedTasks}
 				searchBy="title"
+				setFilter={setFilter}
 			/>
 			{status === 'loading' ? <Loader /> : null}
 			{status === 'error' ? <Error /> : null}
@@ -42,7 +44,7 @@ const TaskListPage: FC = () => {
 				items={sortedTasks}
 				renderItem={(task: ITask) => (
 					<div key={task.id}>
-						<TaskItem task={task} />
+						<TaskItem task={task} filter={filter} />
 					</div>
 				)}
 			/>

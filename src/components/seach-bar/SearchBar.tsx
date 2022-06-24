@@ -5,13 +5,15 @@ interface SearchBarProps<T> {
 	items: T[]
 	setItems: (items: T[]) => void
 	searchBy: keyof T
+	setFilter: (filter: string) => void
 }
 
-function SearchBar<T>({ items, setItems, searchBy }: SearchBarProps<T>) {
+function SearchBar<T>({ items, setItems, searchBy, setFilter }: SearchBarProps<T>) {
 	const [value, setValue] = useState<string>('')
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
 		setValue(e.target.value)
+		setFilter(e.target.value)
 	}
 
 	useEffect(() => {

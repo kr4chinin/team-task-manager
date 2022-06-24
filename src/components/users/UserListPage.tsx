@@ -11,6 +11,7 @@ import Error from '../error/Error'
 const UserListPage = () => {
 	const [users, setUsers] = useState<IUser[]>([])
 	const [sortedUsers, setSortedUsers] = useState<IUser[]>([])
+	const [filter, setFilter] = useState<string>('')
 
 	const navigate = useNavigate()
 
@@ -31,6 +32,7 @@ const UserListPage = () => {
 				items={users}
 				setItems={setSortedUsers}
 				searchBy="name"
+				setFilter={setFilter}
 			/>
 			{status === 'loading' ? <Loader /> : null}
 			{status === 'error' ? <Error /> : null}
@@ -38,7 +40,7 @@ const UserListPage = () => {
 				items={sortedUsers}
 				renderItem={(user: IUser) => (
 					<div onClick={() => navigate(`/user-tasks/${user.id}`)} key={user.id}>
-						<UserItem user={user} />
+						<UserItem user={user} filter={filter}/>
 					</div>
 				)}
 			/>
