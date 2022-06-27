@@ -6,6 +6,9 @@ import OpenUserModal from './components/modal/user-modal/OpenUserModal'
 import { ModalsContextProvider } from './context/ModalsContext'
 
 function App() {
+
+	
+
 	return (
 		<BrowserRouter>
 			<ModalsContextProvider>
@@ -13,7 +16,6 @@ function App() {
 				<div className="content-container">
 					<AppRoutes />
 				</div>
-				<OpenUserModal />
 			</ModalsContextProvider>
 		</BrowserRouter>
 	)

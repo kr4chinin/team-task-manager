@@ -8,11 +8,13 @@ import { useFetching } from '../../hooks/useFetching'
 import Loader from '../loader/Loader'
 import Error from '../error/Error'
 import { useModalsContext } from '../../context/ModalsContext'
+import OpenUserModal from '../modal/user-modal/OpenUserModal'
 
 const UserListPage = () => {
 	const [users, setUsers] = useState<IUser[]>([])
 	const [sortedUsers, setSortedUsers] = useState<IUser[]>([])
 	const [filter, setFilter] = useState('')
+	const [currentId, setCurrentId] = useState(0) 
 
 	const navigate = useNavigate()
 
@@ -27,12 +29,14 @@ const UserListPage = () => {
 
 	const { setIsUserOpen } = useModalsContext()
 
-	function handleOpenModal() {
+	function handleOpenModal(id: number) {
+		setCurrentId(id)
 		setIsUserOpen(true)
 	}
 
 	return (
 		<>
+			<OpenUserModal id={currentId}/>
 			<ActionPanel
 				options={['name', 'email']}
 				btnTitle="Add user"
@@ -46,7 +50,7 @@ const UserListPage = () => {
 			<List
 				items={sortedUsers}
 				renderItem={(user: IUser) => (
-					<div onClick={handleOpenModal} key={user.id}>
+					<div onClick={() => handleOpenModal(user.id)} key={user.id}>
 						<UserItem user={user} filter={filter} />
 					</div>
 				)}

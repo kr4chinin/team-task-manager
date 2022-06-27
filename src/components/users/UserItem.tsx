@@ -18,7 +18,7 @@ const UserItem: FC<UserItemProps> = ({ user, filter }) => {
 			<img
 				className={cl.avatar}
 				alt="User profile"
-				src={`https://picsum.photos/200?random=${user.id}`}
+				src={`https://picsum.photos/id/${user.id + 10}/200`}
 			/>
 			<div className={cl['user-info']}>
 				<p id={cl.name}>{light(user.name)}</p>
