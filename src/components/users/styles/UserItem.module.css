@@ -3,7 +3,7 @@
 .container {
 	font-family: 'Comic Neue', sans-serif;
 	width: 680px;
-	height: 150px;
+	min-height: 150px;
 	background-color: #2b63d0;
 	margin: 8px;
 	padding: 1em;
@@ -25,12 +25,16 @@
 }
 
 #name {
+	width: 300px;
+	height: fit-content;
 	color: white;
 	font-size: 32px;
 	font-weight: bold;
 }
 
 #email {
+	width: 300px;
+	height: fit-content;
 	color: #d9d9d9;
 	font-size: 26px;
 	font-weight: bold;

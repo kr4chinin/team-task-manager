@@ -1,16 +1,5 @@
 @import '../../../assets/fonts/ComicNeue/ComicNeue.css';
 
-.open-user__modal {
-	opacity: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	inset: 0;
-	position: fixed;
-	background: rgba(0, 0, 0, 0.65);
-	pointer-events: none;
-}
-
 .open-user__modal-content {
 	font-family: 'Comic Neue', sans-serif;
 	width: 780px;
@@ -20,11 +9,6 @@
 	justify-content: space-between;
 	opacity: 0;
 	background-color: #4d3bab;
-}
-
-.open-user__modal.active {
-	pointer-events: all;
-	opacity: 1;
 }
 
 .open-user__modal-content.active {
@@ -56,12 +40,17 @@
 	align-items: center;
 }
 
-.btns-container {
+.btns-container,
+.edit-btns-container {
 	width: 780px;
 	height: fit-content;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 7px;
+}
+
+.edit-btns-container {
+	width: 417px;
 }
 
 #user-avatar {
@@ -72,23 +61,31 @@
 
 #user-name {
 	color: white;
+	width: 400px;
+	height: fit-content;
 	font-size: 32px;
 	font-weight: bold;
 }
 
 #user-email {
+	width: 400px;
+	height: fit-content;
 	color: #d9d9d9;
 	font-size: 26px;
 	font-weight: bold;
 }
 
-#user-tasks {
+.user-tasks {
 	color: white;
 	font-size: 28px;
 	font-weight: bold;
 }
 
-#user-completed-tasks {
+.user-tasks.margin, .user-completed-tasks.margin {
+	margin-left: 17px;
+}
+
+.user-completed-tasks {
 	color: #d9d9d9;
 	font-size: 28px;
 	font-weight: bold;
@@ -110,3 +107,27 @@
 #green {
 	color: green;
 }
+
+.edit-name-input, .edit-email-input {
+	font-family: 'Comic Neue', sans-serif;
+	width: 300px;
+	height: 50px;
+	font-size: 26px;
+	color: #b0b0b0;
+	margin-left: 17px;
+	padding: 0.3em;
+	border: 3px solid #D9D9D9;
+}
+
+.edit-email-input {
+	font-size: 24px;
+	margin-top: 0.4em;
+	height: 40px;
+	width: 385px;
+}
+
+.edit-name-input:focus, .edit-email-input:focus {
+	color: black
+}
+
+

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './SearchBar.module.css'
+import cl from './SearchBar.module.css'
 
 interface SearchBarProps<T> {
 	items: T[]
@@ -34,7 +34,14 @@ function SearchBar<T>({
 		)
 	}, [value, items, searchBy, setItems])
 
-	return <input value={value} onChange={handleChange} placeholder="Search..." />
+	return (
+		<input
+			className={cl['search-bar']}
+			value={value}
+			onChange={handleChange}
+			placeholder="Search..."
+		/>
+	)
 }
 
 export default SearchBar

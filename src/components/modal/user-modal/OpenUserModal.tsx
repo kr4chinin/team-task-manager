@@ -1,29 +1,44 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import { useModalsContext } from '../../../context/ModalsContext'
 import { calculateTasks } from '../../../helpers/calculateTasks'
 import { IUser } from '../../../interfaces'
 import ActionBtn from '../../btns/ActionBtn'
+import Modal from '../modal-template/Modal'
 import './OpenUserModal.css'
 
 interface OpenUserModalProps {
 	user: IUser
 	numberOfTasks: number
 	numberOfCompletedTasks: number
-    users: IUser[]
-    setUsers: (users: IUser[]) => void
-
+	users: IUser[]
+	setUsers: (users: IUser[]) => void
 }
 
 const OpenUserModal: FC<OpenUserModalProps> = ({
 	user,
 	numberOfCompletedTasks,
 	numberOfTasks,
-    users,
-    setUsers
+	users,
+	setUsers
 }) => {
+    let completedTasksColor = calculateTasks(
+		numberOfCompletedTasks,
+		numberOfTasks
+	)
+
 	const { isUserOpen, setIsUserOpen } = useModalsContext()
+	const [isEditing, setIsEditing] = useState(false)
+    const [editedData, setEditedData] = useState({
+        name: user?.name,
+        email: user?.email
+    })
+
+    useEffect(() => setEditedData({
+        name: user?.name,
+        email: user?.email
+    }), [user])
 
 	const navigate = useNavigate()
 
@@ -31,25 +46,57 @@ const OpenUserModal: FC<OpenUserModalProps> = ({
 		e.stopPropagation()
 	}
 
-	function handleClose() {
+	function handleDelete() {
+		setUsers(users.filter(u => u.id !== user.id))
 		setIsUserOpen(false)
 	}
 
-	let completedTasksColor = calculateTasks(
-		numberOfCompletedTasks,
-		numberOfTasks
-	)
+	function handleClose() {
+		setIsUserOpen(false)
+		setIsEditing(false)
+	}
 
-    function handleDelete() {
-        setUsers(users.filter(u =>
+	function handleOpenTasks() {
+		navigate(`/user-tasks/${user.id}`)
+		setIsUserOpen(false)
+	}
+
+	function handleBtnClick(e: React.MouseEvent<HTMLDivElement>) {
+		e.stopPropagation()
+	}
+
+    function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setEditedData({...editedData, name: e.target.value})
+    }
+
+    function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setEditedData({...editedData, email: e.target.value})
+    }
+
+    function handleSave() {
+        let editedUser: IUser = user
+
+        editedUser.name = editedData.name
+        editedUser.email = editedData.email
+
+        setUsers([...users.filter(u => 
             u.id !== user.id
-        ))
+        ), editedUser])
+    }
+
+    function handleCancel() {
+        setIsEditing(false)
+        setEditedData({
+            name: user?.name,
+            email: user?.email
+        })
     }
 
 	return createPortal(
-		<div
-			className={isUserOpen ? 'open-user__modal active' : 'open-user__modal'}
-			onClick={handleClose}
+		<Modal
+			isOpen={isUserOpen}
+			setIsOpen={setIsUserOpen}
+			setIsEditing={setIsEditing}
 		>
 			<div className="content-and-btns">
 				<div
@@ -67,12 +114,24 @@ const OpenUserModal: FC<OpenUserModalProps> = ({
 					/>
 					<div className="user-info-container">
 						<div>
-							<p id="user-name">{user?.name}</p>
-							<p id="user-email">e-mail: {user?.email}</p>
+							{!isEditing ? (
+								<p id="user-name">{user?.name}</p>
+							) : (
+								<input
+                                    className='edit-name-input'
+                                    value={editedData.name} 
+                                    onChange={handleNameChange} 
+                                />
+							)}
+							{!isEditing ? (
+								<p id="user-email">e-mail: {user?.email}</p>
+							) : (
+								<input className='edit-email-input' value={editedData.email} onChange={handleEmailChange}/>
+							)}
 						</div>
 						<div className="user-tasks-info-container">
-							<p id="user-tasks">💻 Tasks: {numberOfTasks}</p>
-							<p id="user-completed-tasks">
+							<p className={isEditing ? 'user-tasks margin' : 'user-tasks'}>💻 Tasks: {numberOfTasks}</p>
+							<p className={isEditing ? 'user-completed-tasks margin' : 'user-completed-tasks'}>
 								Completed:{' '}
 								<span id={completedTasksColor}>{numberOfCompletedTasks}</span>
 							</p>
@@ -82,28 +141,45 @@ const OpenUserModal: FC<OpenUserModalProps> = ({
 						❌
 					</p>
 				</div>
-				<div className="btns-container">
-					<ActionBtn
-						title="Edit user"
-						color="#F7A400"
-						width="244px"
-						onClick={() => console.log(1)}
-					/>
-					<ActionBtn
-						title="Open tasks"
-						color="#3A9EFD"
-						width="254px"
-						onClick={() => navigate(`/user-tasks/${user.id}`)}
-					/>
-					<ActionBtn
-						title="Delete user"
-						color="#B43873"
-						width="263px"
-						onClick={handleDelete}
-					/>
-				</div>
+				{!isEditing ? (
+					<div className="btns-container" onClick={handleBtnClick}>
+						<ActionBtn
+							title="Edit user"
+							color="#F7A400"
+							width="244px"
+							onClick={() => setIsEditing(true)}
+						/>
+						<ActionBtn
+							title="Open tasks"
+							color="#3A9EFD"
+							width="254px"
+							onClick={handleOpenTasks}
+						/>
+						<ActionBtn
+							title="Delete user"
+							color="#B43873"
+							width="263px"
+							onClick={handleDelete}
+						/>
+					</div>
+				) : (
+					<div className="edit-btns-container">
+						<ActionBtn
+							title="Save"
+							color="#049804"
+							width="190px"
+							onClick={handleSave}
+						/>
+						<ActionBtn
+							title="Cancel"
+							color="#CF5D5D"
+							width="220px"
+							onClick={handleCancel}
+						/>
+					</div>
+				)}
 			</div>
-		</div>,
+		</Modal>,
 		document.getElementById('open-user-portal')!
 	)
 }
