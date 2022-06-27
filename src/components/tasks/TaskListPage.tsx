@@ -62,7 +62,7 @@ const TaskListPage: FC<TaskListPageProps> = ({ tasks, setTasks }) => {
 				items={sortedTasks}
 				renderItem={(task: ITask) => (
 					<div key={task.id} onClick={() => handleOpenModal(task.id)}>
-						<TaskItem task={task} filter={filter} />
+						<TaskItem task={task} filter={filter} tasks={tasks} setTasks={setTasks}/>
 					</div>
 				)}
 			/>

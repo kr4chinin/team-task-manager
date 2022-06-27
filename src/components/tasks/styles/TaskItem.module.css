@@ -35,6 +35,14 @@
 	font-size: 32px;
 }
 
+#completed {
+	opacity: 0;
+}
+
+.completeBtn .completed {
+	opacity: 0;
+}
+
 #deleteBtn {
 	font-size: 30px;
 }

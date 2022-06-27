@@ -40,9 +40,28 @@ const TaskModal: FC<TaskModalProps> = ({ task, tasks, setTasks }) => {
 		setIsTaskOpen(false)
 	}
 
+    useEffect(() => {
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                setIsTaskOpen(false)
+            }
+        })
+        return () => document.removeEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                setIsTaskOpen(false)
+            }
+        })
+    })
+
+    function handleSaveKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+        if (e.key === 'Enter') {
+            handleSave()
+        }
+    }
+
 	return (
 		<Modal isOpen={isTaskOpen} setIsOpen={setIsTaskOpen}>
-			<div className="task-modal-container">
+			<div className="task-modal-container" onKeyDown={handleSaveKeyDown}>
 				<div
 					onClick={handlePropagation}
 					className={

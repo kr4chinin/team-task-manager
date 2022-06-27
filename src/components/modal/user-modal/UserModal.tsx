@@ -84,6 +84,7 @@ const UserModal: FC<UserModalProps> = ({
 		editedUser.email = editedData.email
 
 		setUsers([...users.filter(u => u.id !== user.id), editedUser])
+		setIsUserOpen(false)
 	}
 
 	function handleCancel() {
@@ -94,13 +95,32 @@ const UserModal: FC<UserModalProps> = ({
 		})
 	}
 
+	useEffect(() => {
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                setIsUserOpen(false)
+            }
+        })
+        return () => document.removeEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                setIsUserOpen(false)
+            }
+        })
+    })
+
+	function handleSaveKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+        if (e.key === 'Enter') {
+            handleSave()
+        }
+    }
+
 	return createPortal(
 		<Modal
 			isOpen={isUserOpen}
 			setIsOpen={setIsUserOpen}
 			setIsEditing={setIsEditing}
 		>
-			<div className="content-and-btns">
+			<div className="content-and-btns" onKeyDown={handleSaveKeyDown}>
 				<div
 					className={
 						isUserOpen ? 'user__modal-content active' : 'user__modal-content'

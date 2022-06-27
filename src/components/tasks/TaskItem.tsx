@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { ITask } from '../../interfaces'
 import cl from './styles/TaskItem.module.css'
 import Highlight from '../../helpers/highlighter/Highlight'
@@ -6,11 +6,29 @@ import Highlight from '../../helpers/highlighter/Highlight'
 interface TaskItemProps {
 	task: ITask
 	filter: string
+	tasks: ITask[]
+	setTasks: (tasks: ITask[]) => void
 }
 
-const TaskItem: FC<TaskItemProps> = ({ task, filter }) => {
+const TaskItem: FC<TaskItemProps> = ({ task, filter, tasks, setTasks }) => {
 	const light = (str: string) => {
 		return <Highlight filter={filter} str={str} />
+	}
+
+	function handleComplete(e: React.MouseEvent<HTMLParagraphElement>) {
+		e.stopPropagation()
+		let completedTask = task
+		completedTask.completed = true
+		setTasks([...tasks.filter(t =>
+			t.id !== task.id 
+		), completedTask])
+	}
+
+	function handleDelete(e: React.MouseEvent<HTMLParagraphElement>) {
+		e.stopPropagation()
+		setTasks(tasks.filter(t => 
+			t.id !== task.id
+		))
 	}
 
 	return (
@@ -18,8 +36,8 @@ const TaskItem: FC<TaskItemProps> = ({ task, filter }) => {
 			<p id={cl.indicator}>{task.completed ? '🟢' : '🔴'}</p>
 			<p id={cl.title}>{light(task.title)}</p>
 			<div className={cl['btn-container']}>
-				<p id={cl.completeBtn}>✔</p>
-				<p id={cl.deleteBtn}>❌</p>
+				<p id={!task.completed ? cl.completeBtn : cl.completed} onClick={handleComplete}>✔</p>
+				<p id={cl.deleteBtn} onClick={handleDelete}>❌</p>
 			</div>
 		</div>
 	)
