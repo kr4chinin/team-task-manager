@@ -2,16 +2,26 @@ import { FC } from 'react'
 import { IUser } from '../../interfaces'
 import Highlight from '../../helpers/highlighter/Highlight'
 import cl from './styles/UserItem.module.css'
+import { calculateTasks } from '../../helpers/calculateTasks'
 
 interface UserItemProps {
 	user: IUser
 	filter: string
+	numberOfTasks: number
+	numberOfCompletedTasks: number
 }
 
-const UserItem: FC<UserItemProps> = ({ user, filter }) => {
+const UserItem: FC<UserItemProps> = ({
+	user,
+	filter,
+	numberOfTasks,
+	numberOfCompletedTasks
+}) => {
 	const light = (str: string) => {
 		return <Highlight filter={filter} str={str} />
 	}
+
+	let completedTaskColor = calculateTasks(numberOfCompletedTasks, numberOfTasks)
 
 	return (
 		<div className={cl.container}>
@@ -26,10 +36,13 @@ const UserItem: FC<UserItemProps> = ({ user, filter }) => {
 			</div>
 			<div>
 				<p id={cl.tasks}>
-					💻 Tasks: <span>10</span>
+					💻 Tasks: <span>{numberOfTasks}</span>
 				</p>
 				<p id={cl.completed}>
-					Completed: <span>5</span>
+					Completed:{' '}
+					<span className={cl[completedTaskColor]}>
+						{numberOfCompletedTasks}
+					</span>
 				</p>
 			</div>
 		</div>

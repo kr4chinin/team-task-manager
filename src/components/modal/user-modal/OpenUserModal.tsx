@@ -4,10 +4,10 @@ import { useModalsContext } from '../../../context/ModalsContext'
 import './OpenUserModal.css'
 
 interface OpenUserModalProps {
-    id: number
+	id: number
 }
 
-const OpenUserModal: FC<OpenUserModalProps> = ({id}) => {
+const OpenUserModal: FC<OpenUserModalProps> = ({ id }) => {
 	const { isUserOpen, setIsUserOpen } = useModalsContext()
 
 	function handlePropagation(e: React.MouseEvent<HTMLDivElement>) {
@@ -31,7 +31,11 @@ const OpenUserModal: FC<OpenUserModalProps> = ({id}) => {
 				}
 				onClick={handlePropagation}
 			>
-				<img className='user-avatar' src={`https://picsum.photos/id/${id + 10}/200`} />
+				<img
+					className="user-avatar"
+					alt="User avatar"
+					src={`https://picsum.photos/id/${id + 10}/200`}
+				/>
 			</div>
 		</div>,
 		document.getElementById('open-user-portal')!

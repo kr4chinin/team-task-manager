@@ -8,16 +8,20 @@ import TaskItem from './TaskItem'
 import Loader from '../loader/Loader'
 import Error from '../error/Error'
 
-type UserTasksParams = {
+type TasksParams = {
 	id: string
 }
 
-const TaskListPage: FC = () => {
-	const [tasks, setTasks] = useState<ITask[]>([])
+interface TaskListPageProps {
+	tasks: ITask[]
+	setTasks: (tasks: ITask[]) => void
+}
+
+const TaskListPage: FC<TaskListPageProps> = ({ tasks, setTasks }) => {
 	const [sortedTasks, setSortedTasks] = useState<ITask[]>([])
 	const [filter, setFilter] = useState('')
 
-	const params = useParams<UserTasksParams>()
+	const params = useParams<TasksParams>()
 
 	const { execute, status } = useFetching<ITask>(
 		`https://jsonplaceholder.typicode.com/todos?userId=${params.id}`,

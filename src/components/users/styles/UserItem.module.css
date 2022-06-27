@@ -47,3 +47,15 @@
 	font-size: 26px;
 	font-weight: bold;
 }
+
+.red {
+	color: rgb(232, 28, 28);
+}
+
+.yellow {
+	color: yellow;
+}
+
+.green {
+	color: green;
+}
