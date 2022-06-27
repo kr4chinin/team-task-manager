@@ -7,7 +7,7 @@ type HighlightProps = {
 }
 
 const Highlight: FC<HighlightProps> = ({ filter, str }) => {
-	if (!filter) return <>str</>
+	if (!filter) return <>{str}</>
 
 	const regexp = new RegExp(filter, 'ig')
 	const matchValue = str.match(regexp)
@@ -15,7 +15,7 @@ const Highlight: FC<HighlightProps> = ({ filter, str }) => {
 	if (matchValue) {
 		return (
 			<>
-				{str.split(regexp).map((s: string, index: number, array: string[]) => {
+				{str.split(regexp).map((s, index, array) => {
 					if (index < array.length - 1) {
 						const overlap = matchValue.shift()
 						return (

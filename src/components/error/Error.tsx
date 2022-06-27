@@ -1,7 +1,11 @@
-import './Error.css'
+import cl from './Error.module.css'
 
 const Error = () => {
-	return <h1>🚨 Error occured!</h1>
+	return (
+		<div className={cl.container}>
+			<h1>🚨 Error occured!</h1>
+		</div>
+	)
 }
 
 export default Error
