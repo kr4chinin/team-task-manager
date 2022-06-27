@@ -6,8 +6,8 @@ import ActionPanel from '../action-panel/ActionPanel'
 import { useFetching } from '../../hooks/useFetching'
 import Loader from '../loader/Loader'
 import Error from '../error/Error'
-import { useModalsContext } from '../../context/ModalsContext'
-import OpenUserModal from '../modal/user-modal/OpenUserModal'
+import { useModalContext } from '../../context/ModalContext'
+import UserModal from '../modal/user-modal/UserModal'
 import {
 	getNumberOfTasks,
 	getNumberOfCompletedTasks
@@ -23,7 +23,7 @@ const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
 	const [filter, setFilter] = useState('')
 	const [currentUser, setCurrentUser] = useState<any>()
 
-	const { setIsUserOpen } = useModalsContext()
+	const { setIsUserOpen } = useModalContext()
 
 	const { execute, status } = useFetching<IUser>(
 		'https://jsonplaceholder.typicode.com/users',
@@ -58,7 +58,7 @@ const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
 
 	return (
 		<>
-			<OpenUserModal
+			<UserModal
 				users={users}
 				setUsers={setUsers}
 				user={currentUser}

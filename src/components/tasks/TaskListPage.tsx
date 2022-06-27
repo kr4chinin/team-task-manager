@@ -7,6 +7,8 @@ import List from '../List'
 import TaskItem from './TaskItem'
 import Loader from '../loader/Loader'
 import Error from '../error/Error'
+import { useModalContext } from '../../context/ModalContext'
+import TaskModal from '../modal/user-modal/TaskModal'
 
 type TasksParams = {
 	id: string
@@ -20,6 +22,8 @@ interface TaskListPageProps {
 const TaskListPage: FC<TaskListPageProps> = ({ tasks, setTasks }) => {
 	const [sortedTasks, setSortedTasks] = useState<ITask[]>([])
 	const [filter, setFilter] = useState('')
+	const [currentTask, setCurrentTask] = useState<any>()
+	const { setIsTaskOpen } = useModalContext()
 
 	const params = useParams<TasksParams>()
 
@@ -32,8 +36,18 @@ const TaskListPage: FC<TaskListPageProps> = ({ tasks, setTasks }) => {
 		execute()
 	}, [execute])
 
+	function handleOpenModal(id: number) {
+		for (let t of tasks) {
+			if (t.id === id) {
+				setCurrentTask(t)
+			}
+		}
+		setIsTaskOpen(true)
+	}
+
 	return (
 		<>
+			<TaskModal task={currentTask} tasks={tasks} setTasks={setTasks} />
 			<ActionPanel
 				options={['title', 'completed']}
 				btnTitle="Add task"
@@ -47,7 +61,7 @@ const TaskListPage: FC<TaskListPageProps> = ({ tasks, setTasks }) => {
 			<List
 				items={sortedTasks}
 				renderItem={(task: ITask) => (
-					<div key={task.id}>
+					<div key={task.id} onClick={() => handleOpenModal(task.id)}>
 						<TaskItem task={task} filter={filter} />
 					</div>
 				)}

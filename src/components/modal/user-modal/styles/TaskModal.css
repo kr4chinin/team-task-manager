@@ -1,0 +1,44 @@
+.task-modal-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.task__modal-content {
+	width: 750px;
+	min-height: 180px;
+	background-color: #0384fc;
+	opacity: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 20px;
+}
+
+.task__modal-content.active {
+	opacity: 1;
+}
+
+.edit-title-input {
+	font-size: 30px;
+	color: #b0b0b0;
+	width: 640px;
+	height: 65px;
+	border: 3px solid #d9d9d9;
+	padding: 0.3em;
+}
+
+.edit-title-input:focus {
+	color: black;
+}
+
+#task-icon {
+	font-size: 62px;
+}
+
+.task-btns-container {
+	margin-top: 7px;
+	width: 387px;
+	display: flex;
+	justify-content: space-between;
+}

@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
-import { useModalsContext } from '../../../context/ModalsContext'
+import { useModalContext } from '../../../context/ModalContext'
 import { calculateTasks } from '../../../helpers/calculateTasks'
 import { IUser } from '../../../interfaces'
 import ActionBtn from '../../btns/ActionBtn'
 import Modal from '../modal-template/Modal'
-import './OpenUserModal.css'
+import './styles/UserModal.css'
 
-interface OpenUserModalProps {
+interface UserModalProps {
 	user: IUser
 	numberOfTasks: number
 	numberOfCompletedTasks: number
@@ -16,29 +16,33 @@ interface OpenUserModalProps {
 	setUsers: (users: IUser[]) => void
 }
 
-const OpenUserModal: FC<OpenUserModalProps> = ({
+const UserModal: FC<UserModalProps> = ({
 	user,
 	numberOfCompletedTasks,
 	numberOfTasks,
 	users,
 	setUsers
 }) => {
-    let completedTasksColor = calculateTasks(
+	let completedTasksColor = calculateTasks(
 		numberOfCompletedTasks,
 		numberOfTasks
 	)
 
-	const { isUserOpen, setIsUserOpen } = useModalsContext()
+	const { isUserOpen, setIsUserOpen } = useModalContext()
 	const [isEditing, setIsEditing] = useState(false)
-    const [editedData, setEditedData] = useState({
-        name: user?.name,
-        email: user?.email
-    })
+	const [editedData, setEditedData] = useState({
+		name: user?.name,
+		email: user?.email
+	})
 
-    useEffect(() => setEditedData({
-        name: user?.name,
-        email: user?.email
-    }), [user])
+	useEffect(
+		() =>
+			setEditedData({
+				name: user?.name,
+				email: user?.email
+			}),
+		[user]
+	)
 
 	const navigate = useNavigate()
 
@@ -65,32 +69,30 @@ const OpenUserModal: FC<OpenUserModalProps> = ({
 		e.stopPropagation()
 	}
 
-    function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setEditedData({...editedData, name: e.target.value})
-    }
+	function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setEditedData({ ...editedData, name: e.target.value })
+	}
 
-    function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setEditedData({...editedData, email: e.target.value})
-    }
+	function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setEditedData({ ...editedData, email: e.target.value })
+	}
 
-    function handleSave() {
-        let editedUser: IUser = user
+	function handleSave() {
+		let editedUser: IUser = user
 
-        editedUser.name = editedData.name
-        editedUser.email = editedData.email
+		editedUser.name = editedData.name
+		editedUser.email = editedData.email
 
-        setUsers([...users.filter(u => 
-            u.id !== user.id
-        ), editedUser])
-    }
+		setUsers([...users.filter(u => u.id !== user.id), editedUser])
+	}
 
-    function handleCancel() {
-        setIsEditing(false)
-        setEditedData({
-            name: user?.name,
-            email: user?.email
-        })
-    }
+	function handleCancel() {
+		setIsEditing(false)
+		setEditedData({
+			name: user?.name,
+			email: user?.email
+		})
+	}
 
 	return createPortal(
 		<Modal
@@ -101,9 +103,7 @@ const OpenUserModal: FC<OpenUserModalProps> = ({
 			<div className="content-and-btns">
 				<div
 					className={
-						isUserOpen
-							? 'open-user__modal-content active'
-							: 'open-user__modal-content'
+						isUserOpen ? 'user__modal-content active' : 'user__modal-content'
 					}
 					onClick={handlePropagation}
 				>
@@ -118,20 +118,32 @@ const OpenUserModal: FC<OpenUserModalProps> = ({
 								<p id="user-name">{user?.name}</p>
 							) : (
 								<input
-                                    className='edit-name-input'
-                                    value={editedData.name} 
-                                    onChange={handleNameChange} 
-                                />
+									className="edit-name-input"
+									value={editedData.name}
+									onChange={handleNameChange}
+								/>
 							)}
 							{!isEditing ? (
 								<p id="user-email">e-mail: {user?.email}</p>
 							) : (
-								<input className='edit-email-input' value={editedData.email} onChange={handleEmailChange}/>
+								<input
+									className="edit-email-input"
+									value={editedData.email}
+									onChange={handleEmailChange}
+								/>
 							)}
 						</div>
 						<div className="user-tasks-info-container">
-							<p className={isEditing ? 'user-tasks margin' : 'user-tasks'}>💻 Tasks: {numberOfTasks}</p>
-							<p className={isEditing ? 'user-completed-tasks margin' : 'user-completed-tasks'}>
+							<p className={isEditing ? 'user-tasks margin' : 'user-tasks'}>
+								💻 Tasks: {numberOfTasks}
+							</p>
+							<p
+								className={
+									isEditing
+										? 'user-completed-tasks margin'
+										: 'user-completed-tasks'
+								}
+							>
 								Completed:{' '}
 								<span id={completedTasksColor}>{numberOfCompletedTasks}</span>
 							</p>
@@ -184,4 +196,4 @@ const OpenUserModal: FC<OpenUserModalProps> = ({
 	)
 }
 
-export default OpenUserModal
+export default UserModal
