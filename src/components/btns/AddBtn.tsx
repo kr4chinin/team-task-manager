@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import cl from './styles/AddButton.module.css'
 
-interface AddButtonProps {
+interface AddBtnProps {
 	title: string
 }
 
-const AddButton: FC<AddButtonProps> = ({ title }) => {
+const AddBtn: FC<AddBtnProps> = ({ title }) => {
 	return <button className={cl['add-btn']}>{title}</button>
 }
 
-export default AddButton
+export default AddBtn

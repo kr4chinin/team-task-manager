@@ -1,3 +1,5 @@
+@import '../../../assets/fonts/ComicNeue/ComicNeue.css';
+
 .open-user__modal {
 	opacity: 0;
 	display: flex;
@@ -10,12 +12,12 @@
 }
 
 .open-user__modal-content {
+	font-family: 'Comic Neue', sans-serif;
 	width: 780px;
 	height: 210px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: fixed;
+	padding: 15px;
+	justify-content: space-between;
 	opacity: 0;
 	background-color: #4d3bab;
 }
@@ -29,8 +31,82 @@
 	opacity: 1;
 }
 
-.user-avatar {
+.content-and-btns {
+	width: 780px;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	align-items: center;
+}
+
+.user-info-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 180px;
+	margin-right: 15%;
+}
+
+.user-tasks-info-container {
+	width: 400px;
+	height: fit-content;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.btns-container {
+	width: 780px;
+	height: fit-content;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 7px;
+}
+
+#user-avatar {
 	height: 180px;
 	width: 180px;
 	border: 4px solid white;
+}
+
+#user-name {
+	color: white;
+	font-size: 32px;
+	font-weight: bold;
+}
+
+#user-email {
+	color: #d9d9d9;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+#user-tasks {
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+#user-completed-tasks {
+	color: #d9d9d9;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+#close-cross {
+	font-size: 24px;
+	cursor: pointer;
+}
+
+#red {
+	color: rgb(232, 28, 28);
+}
+
+#yellow {
+	color: yellow;
+}
+
+#green {
+	color: green;
 }

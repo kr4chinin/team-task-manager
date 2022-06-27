@@ -21,7 +21,10 @@ const UserItem: FC<UserItemProps> = ({
 		return <Highlight filter={filter} str={str} />
 	}
 
-	let completedTaskColor = calculateTasks(numberOfCompletedTasks, numberOfTasks)
+	let completedTasksColor = calculateTasks(
+		numberOfCompletedTasks,
+		numberOfTasks
+	)
 
 	return (
 		<div className={cl.container}>
@@ -35,12 +38,10 @@ const UserItem: FC<UserItemProps> = ({
 				<p id={cl.email}>{user.email}</p>
 			</div>
 			<div>
-				<p id={cl.tasks}>
-					💻 Tasks: <span>{numberOfTasks}</span>
-				</p>
+				<p id={cl.tasks}>💻 Tasks: {numberOfTasks}</p>
 				<p id={cl.completed}>
 					Completed:{' '}
-					<span className={cl[completedTaskColor]}>
+					<span className={cl[completedTasksColor]}>
 						{numberOfCompletedTasks}
 					</span>
 				</p>

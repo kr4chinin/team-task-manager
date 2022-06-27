@@ -1,0 +1,13 @@
+@import '../../../assets/fonts/ComicNeue/ComicNeue.css';
+
+.action-btn {
+	font-family: 'Comic Neue', sans-serif;
+	font-weight: bold;
+	color: white;
+	font-size: 25px;
+	width: 200px;
+	height: 75px;
+	border-radius: 0.6em;
+	border: transparent;
+	cursor: pointer;
+}

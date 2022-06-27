@@ -1,4 +1,4 @@
-import AddButton from '../btns/AddButton'
+import AddBtn from '../btns/AddBtn'
 import SearchBar from '../seach-bar/SearchBar'
 import SortBar from '../sort-bar/SortBar'
 import cl from './ActionPanel.module.css'
@@ -22,7 +22,7 @@ function ActionPanel<T>({
 }: ActionPanelProps<T>) {
 	return (
 		<div className={cl.container}>
-			<AddButton title={btnTitle} />
+			<AddBtn title={btnTitle} />
 			<div className={cl['search-sort-container']}>
 				<SearchBar
 					items={items}

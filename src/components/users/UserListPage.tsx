@@ -8,6 +8,10 @@ import Loader from '../loader/Loader'
 import Error from '../error/Error'
 import { useModalsContext } from '../../context/ModalsContext'
 import OpenUserModal from '../modal/user-modal/OpenUserModal'
+import {
+	getNumberOfTasks,
+	getNumberOfCompletedTasks
+} from '../../helpers/calculateTasks'
 
 interface UserListPageProps {
 	tasks: ITask[]
@@ -17,7 +21,9 @@ const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
 	const [users, setUsers] = useState<IUser[]>([])
 	const [sortedUsers, setSortedUsers] = useState<IUser[]>([])
 	const [filter, setFilter] = useState('')
-	const [currentId, setCurrentId] = useState(0)
+	const [currentUser, setCurrentUser] = useState<any>()
+
+	const { setIsUserOpen } = useModalsContext()
 
 	const { execute, status } = useFetching<IUser>(
 		'https://jsonplaceholder.typicode.com/users',
@@ -28,13 +34,16 @@ const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
 		execute()
 	}, [execute])
 
-	const { setIsUserOpen } = useModalsContext()
-
 	function handleOpenModal(id: number) {
-		setCurrentId(id)
 		setIsUserOpen(true)
+		for (let user of users) {
+			if (user.id === id) {
+				setCurrentUser(user)
+			}
+		}
 	}
 
+	// getting all tasks for calculations
 	const [calcTasks, setCalcTasks] = useState<ITask[]>(tasks)
 	const { execute: executeTasks } = useFetching<ITask>(
 		`https://jsonplaceholder.typicode.com/todos`,
@@ -47,29 +56,18 @@ const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
 		// eslint-disable-next-line
 	}, [])
 
-	function getNumberOfTasks(id: number) {
-		let count = 0
-		for (let t of calcTasks) {
-			if (t.userId === id) {
-				count++
-			}
-		}
-		return count
-	}
-
-	function getNumberOfCompletedTasks(id: number) {
-		let count = 0
-		for (let t of calcTasks) {
-			if (t.userId === id) {
-				if (t.completed) count++
-			}
-		}
-		return count
-	}
-
 	return (
 		<>
-			<OpenUserModal id={currentId} />
+			<OpenUserModal
+				users={users}
+				setUsers={setUsers}
+				user={currentUser}
+				numberOfTasks={getNumberOfTasks(currentUser?.id, calcTasks)}
+				numberOfCompletedTasks={getNumberOfCompletedTasks(
+					currentUser?.id,
+					calcTasks
+				)}
+			/>
 			<ActionPanel
 				options={['name', 'email']}
 				btnTitle="Add user"
@@ -87,8 +85,11 @@ const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
 						<UserItem
 							user={user}
 							filter={filter}
-							numberOfTasks={getNumberOfTasks(user.id)}
-							numberOfCompletedTasks={getNumberOfCompletedTasks(user.id)}
+							numberOfTasks={getNumberOfTasks(user.id, calcTasks)}
+							numberOfCompletedTasks={getNumberOfCompletedTasks(
+								user.id,
+								calcTasks
+							)}
 						/>
 					</div>
 				)}
