@@ -1,0 +1,30 @@
+.open-user__modal {
+	opacity: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	inset: 0;
+	position: fixed;
+	background: rgba(0, 0, 0, 0.65);
+	pointer-events: none;
+}
+
+.open-user__modal-content {
+	width: 780px;
+	height: 210px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	opacity: 0;
+	background-color: #4d3bab;
+}
+
+.open-user__modal.active {
+	pointer-events: all;
+	opacity: 1;
+}
+
+.open-user__modal-content.active {
+	opacity: 1;
+}

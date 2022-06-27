@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useFetching } from '../../hooks/useFetching'
 import Loader from '../loader/Loader'
 import Error from '../error/Error'
+import { useModalsContext } from '../../context/ModalsContext'
 
 const UserListPage = () => {
 	const [users, setUsers] = useState<IUser[]>([])
@@ -24,6 +25,12 @@ const UserListPage = () => {
 		execute()
 	}, [execute])
 
+	const { setIsUserOpen } = useModalsContext()
+
+	function handleOpenModal() {
+		setIsUserOpen(true)
+	}
+
 	return (
 		<>
 			<ActionPanel
@@ -39,7 +46,7 @@ const UserListPage = () => {
 			<List
 				items={sortedUsers}
 				renderItem={(user: IUser) => (
-					<div onClick={() => navigate(`/user-tasks/${user.id}`)} key={user.id}>
+					<div onClick={handleOpenModal} key={user.id}>
 						<UserItem user={user} filter={filter} />
 					</div>
 				)}
