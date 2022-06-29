@@ -31,8 +31,19 @@ const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
 	)
 
 	useEffect(() => {
-		execute()
+		if (localStorage.getItem('users') === null) {
+			execute()
+		} else {
+			let usersFromStorage = localStorage.getItem('users')
+			if (typeof usersFromStorage === 'string') {
+				setUsers(JSON.parse(usersFromStorage))
+			}
+		}
 	}, [execute])
+
+	useEffect(() => {
+		localStorage.setItem('users', JSON.stringify(users))
+	}, [users])
 
 	function handleOpenModal(id: number) {
 		setIsUserOpen(true)
