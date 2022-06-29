@@ -4,6 +4,7 @@ import { useModalContext } from '../../../context/ModalContext'
 import { ITask } from '../../../interfaces'
 import React, { FC, useEffect, useState } from 'react'
 import ActionBtn from '../../btns/ActionBtn'
+import { createPortal } from 'react-dom'
 
 interface TaskModalProps {
 	task: ITask
@@ -60,7 +61,7 @@ const TaskModal: FC<TaskModalProps> = ({ task, tasks, setTasks }) => {
 		}
 	}
 
-	return (
+	return createPortal(
 		<Modal isOpen={isTaskOpen} setIsOpen={setIsTaskOpen}>
 			<div className="task-modal-container" onKeyDown={handleSaveKeyDown}>
 				<div
@@ -91,7 +92,8 @@ const TaskModal: FC<TaskModalProps> = ({ task, tasks, setTasks }) => {
 					/>
 				</div>
 			</div>
-		</Modal>
+		</Modal>,
+		document.getElementById('open-task-portal')!
 	)
 }
 

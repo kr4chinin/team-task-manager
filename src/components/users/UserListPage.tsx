@@ -7,12 +7,13 @@ import { useFetching } from '../../hooks/useFetching'
 import Loader from '../loader/Loader'
 import Error from '../error/Error'
 import { useModalContext } from '../../context/ModalContext'
-import UserModal from '../modal/user-modal/UserModal'
+import UserModal from '../modal/user/UserModal'
 import {
 	getNumberOfTasks,
 	getNumberOfCompletedTasks
 } from '../../helpers/calculateTasks'
 import { ITask } from '../../interfaces'
+import AddUserModal from '../modal/user/AddUserModal'
 
 const UserListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])
@@ -82,8 +83,11 @@ const UserListPage: FC = () => {
 		}
 	}, [tasks])
 
+	const { setIsAddingUser } = useModalContext() 
+
 	return (
 		<>
+			<AddUserModal users={users} setUsers={setUsers}/>
 			<UserModal
 				users={users}
 				setUsers={setUsers}
@@ -95,6 +99,7 @@ const UserListPage: FC = () => {
 				)}
 			/>
 			<ActionPanel
+				onClick={() => setIsAddingUser(true)}
 				options={['name', 'email']}
 				btnTitle="Add user"
 				items={users}

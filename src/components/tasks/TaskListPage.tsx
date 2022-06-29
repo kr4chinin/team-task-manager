@@ -5,7 +5,7 @@ import ActionPanel from '../action-panel/ActionPanel'
 import List from '../List'
 import TaskItem from './TaskItem'
 import { useModalContext } from '../../context/ModalContext'
-import TaskModal from '../modal/user-modal/TaskModal'
+import TaskModal from '../modal/task/TaskModal'
 
 type TasksParams = {
 	id: string
@@ -63,6 +63,7 @@ const TaskListPage: FC = () => {
 				setItems={setSortedTasks}
 				searchBy="title"
 				setFilter={setFilter}
+				onClick={() => console.log(1)}
 			/>
 			<List
 				items={sortedTasks}

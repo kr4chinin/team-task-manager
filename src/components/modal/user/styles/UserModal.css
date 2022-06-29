@@ -2,7 +2,7 @@
 
 .user__modal-content {
 	font-family: 'Comic Neue', sans-serif;
-	width: 780px;
+	min-width: 780px;
 	height: 210px;
 	display: flex;
 	padding: 15px;

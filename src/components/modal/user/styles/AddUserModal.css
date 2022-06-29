@@ -1,0 +1,47 @@
+@import '../../../../assets/fonts/ComicNeue/ComicNeue.css';
+
+.add-user-info-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 180px;
+}
+
+.add-user-info-container {
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 180px;
+	margin-right: 20px;
+
+}
+
+.add-name-input,
+.add-email-input {
+	font-family: 'Comic Neue', sans-serif;
+	width: 400px;
+	height: 50px;
+	font-size: 26px;
+	color: #b0b0b0;
+	margin-left: 17px;
+	padding: 0.3em;
+	border: 3px solid #d9d9d9;
+}
+
+.add-email-input {
+    width: 450px;
+	height: 40px;
+	font-size: 22px;
+    margin-top: 10px;
+}
+
+#new-avatar {
+    height: 180px;
+	width: 280px;
+	border: 4px solid white;
+}
+
+.add-name-input:focus,
+.add-email-input:focus {
+	color: black;
+}

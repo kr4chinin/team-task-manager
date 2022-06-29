@@ -10,6 +10,7 @@ interface ActionPanelProps<T> {
 	searchBy: keyof T
 	options: Array<Extract<keyof T, string>>
 	setFilter: (filter: string) => void
+	onClick: () => void
 }
 
 function ActionPanel<T>({
@@ -18,11 +19,12 @@ function ActionPanel<T>({
 	setItems,
 	searchBy,
 	options,
-	setFilter
+	setFilter,
+	onClick
 }: ActionPanelProps<T>) {
 	return (
 		<div className={cl.container}>
-			<AddBtn title={btnTitle} />
+			<AddBtn title={btnTitle} onClick={onClick}/>
 			<div className={cl['search-sort-container']}>
 				<SearchBar
 					items={items}
