@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import List from '../List'
 import UserItem from './UserItem'
-import { ITask, IUser } from '../../interfaces'
+import { IUser } from '../../interfaces'
 import ActionPanel from '../action-panel/ActionPanel'
 import { useFetching } from '../../hooks/useFetching'
 import Loader from '../loader/Loader'
@@ -12,12 +12,31 @@ import {
 	getNumberOfTasks,
 	getNumberOfCompletedTasks
 } from '../../helpers/calculateTasks'
+import { ITask } from '../../interfaces'
 
-interface UserListPageProps {
-	tasks: ITask[]
-}
+const UserListPage: FC = () => {
+	const [tasks, setTasks] = useState<ITask[]>([])
 
-const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
+	const { execute: executeTasks } = useFetching<ITask>(
+		`https://jsonplaceholder.typicode.com/todos`,
+		setTasks
+	)
+
+	useEffect(() => {
+		if (localStorage.getItem('tasks') === null) {
+			executeTasks()
+		} else {
+			let tasksFromStorage = localStorage.getItem('tasks')
+			if (typeof tasksFromStorage === 'string') {
+				setTasks(JSON.parse(tasksFromStorage))
+			}
+		}
+	}, [executeTasks])
+
+	useEffect(() => {
+		localStorage.setItem('tasks', JSON.stringify(tasks))
+	}, [tasks])
+
 	const [users, setUsers] = useState<IUser[]>([])
 	const [sortedUsers, setSortedUsers] = useState<IUser[]>([])
 	const [filter, setFilter] = useState('')
@@ -54,18 +73,14 @@ const UserListPage: FC<UserListPageProps> = ({ tasks }) => {
 		}
 	}
 
-	// getting all tasks for calculations
-	const [calcTasks, setCalcTasks] = useState<ITask[]>(tasks)
-	const { execute: executeTasks } = useFetching<ITask>(
-		`https://jsonplaceholder.typicode.com/todos`,
-		setCalcTasks
-	)
+	const [calcTasks, setCalcTasks] = useState<ITask[]>([])
 
 	useEffect(() => {
-		executeTasks()
-		setCalcTasks([...tasks, ...calcTasks])
-		// eslint-disable-next-line
-	}, [])
+		let tasksFromStorage = localStorage.getItem('tasks')
+		if (typeof tasksFromStorage === 'string') {
+			setCalcTasks(JSON.parse(tasksFromStorage))
+		}
+	}, [tasks])
 
 	return (
 		<>

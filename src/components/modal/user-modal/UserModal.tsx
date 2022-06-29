@@ -96,23 +96,24 @@ const UserModal: FC<UserModalProps> = ({
 	}
 
 	useEffect(() => {
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                setIsUserOpen(false)
-            }
-        })
-        return () => document.removeEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                setIsUserOpen(false)
-            }
-        })
-    })
+		document.addEventListener('keydown', e => {
+			if (e.key === 'Escape') {
+				setIsUserOpen(false)
+			}
+		})
+		return () =>
+			document.removeEventListener('keydown', e => {
+				if (e.key === 'Escape') {
+					setIsUserOpen(false)
+				}
+			})
+	})
 
 	function handleSaveKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-        if (e.key === 'Enter') {
-            handleSave()
-        }
-    }
+		if (e.key === 'Enter') {
+			handleSave()
+		}
+	}
 
 	return createPortal(
 		<Modal

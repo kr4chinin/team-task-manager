@@ -19,16 +19,12 @@ const TaskItem: FC<TaskItemProps> = ({ task, filter, tasks, setTasks }) => {
 		e.stopPropagation()
 		let completedTask = task
 		completedTask.completed = true
-		setTasks([...tasks.filter(t =>
-			t.id !== task.id 
-		), completedTask])
+		setTasks([...tasks.filter(t => t.id !== task.id), completedTask])
 	}
 
 	function handleDelete(e: React.MouseEvent<HTMLParagraphElement>) {
 		e.stopPropagation()
-		setTasks(tasks.filter(t => 
-			t.id !== task.id
-		))
+		setTasks(tasks.filter(t => t.id !== task.id))
 	}
 
 	return (
@@ -36,8 +32,15 @@ const TaskItem: FC<TaskItemProps> = ({ task, filter, tasks, setTasks }) => {
 			<p id={cl.indicator}>{task.completed ? '🟢' : '🔴'}</p>
 			<p id={cl.title}>{light(task.title)}</p>
 			<div className={cl['btn-container']}>
-				<p id={!task.completed ? cl.completeBtn : cl.completed} onClick={handleComplete}>✔</p>
-				<p id={cl.deleteBtn} onClick={handleDelete}>❌</p>
+				<p
+					id={!task.completed ? cl.completeBtn : cl.completed}
+					onClick={handleComplete}
+				>
+					✔
+				</p>
+				<p id={cl.deleteBtn} onClick={handleDelete}>
+					❌
+				</p>
 			</div>
 		</div>
 	)
