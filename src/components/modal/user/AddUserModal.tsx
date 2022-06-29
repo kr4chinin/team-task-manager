@@ -4,7 +4,7 @@ import Modal from "../modal-template/Modal"
 import './styles/AddUserModal.css'
 import './styles/UserModal.css'
 import ActionBtn from "../../btns/ActionBtn"
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 import { IUser } from "../../../interfaces"
 
 interface AddUserModalProps {
@@ -47,6 +47,7 @@ const AddUserModal: FC<AddUserModalProps> = ({users, setUsers}) => {
 			email: '',
             id: newUser.id + 1
 		})
+        setIsGenereted(false)
 	}
 
     function handleCancel() {
@@ -56,7 +57,28 @@ const AddUserModal: FC<AddUserModalProps> = ({users, setUsers}) => {
 			email: '',
             id: newUser.id
 		})
+        setIsGenereted(false)
 	}
+
+    function handleGeneratePicture() {
+        setIsGenereted(true)
+    }
+
+    const [isGenerated, setIsGenereted] = useState(false)
+
+    useEffect(() => {
+		document.addEventListener('keydown', e => {
+			if (e.key === 'Escape') {
+				setIsAddingUser(false)
+			}
+		})
+		return () =>
+			document.removeEventListener('keydown', e => {
+				if (e.key === 'Escape') {
+					setIsAddingUser(false)
+				}
+			})
+	})
 
     return createPortal(
         <Modal isOpen={isAddingUser} setIsOpen={setIsAddingUser}>
@@ -67,11 +89,18 @@ const AddUserModal: FC<AddUserModalProps> = ({users, setUsers}) => {
                         }
                         onClick={handlePropagation}
                     >
-                        <img
-                            id="new-avatar"
-                            alt="User avatar"
-                            src={newUser ? `https://picsum.photos/id/${newUser.id + 10}/200` : ''}
-                        />
+                        {isGenerated ? (
+                            <img
+                                id="new-avatar"
+                                alt="User avatar"
+                                src={newUser ? `https://picsum.photos/id/${newUser.id + 10}/200` : ''}
+                            />
+                        ) : (
+                            <div className="generate-avatar">
+                                <p id='generate-avatar-title' onClick={handleGeneratePicture}>👤 Click to generate a profile picture!</p>
+                            </div>
+                        )}
+
                         <div className="add-user-info-container">
                             <div>
                                     <input
