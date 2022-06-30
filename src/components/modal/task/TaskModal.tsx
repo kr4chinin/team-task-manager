@@ -6,6 +6,7 @@ import React, { FC, useEffect, useState } from 'react'
 import ActionBtn from '../../btns/ActionBtn'
 import { createPortal } from 'react-dom'
 import { useEscape } from '../../../hooks/useEscape'
+import { saveWithEnter } from '../../../helpers/saveWithEnter'
 
 interface TaskModalProps {
 	task: ITask
@@ -44,15 +45,12 @@ const TaskModal: FC<TaskModalProps> = ({ task, tasks, setTasks }) => {
 
 	useEscape(setIsTaskOpen)
 
-	function handleSaveKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-		if (e.key === 'Enter') {
-			handleSave()
-		}
-	}
-
 	return createPortal(
 		<Modal isOpen={isTaskOpen} setIsOpen={setIsTaskOpen}>
-			<div className="task-modal-container" onKeyDown={handleSaveKeyDown}>
+			<div
+				className="task-modal-container"
+				onKeyDown={e => saveWithEnter(e, handleSave)}
+			>
 				<div
 					onClick={handlePropagation}
 					className={

@@ -21,6 +21,8 @@ const UserItem: FC<UserItemProps> = ({
 		return <Highlight filter={filter} str={str} />
 	}
 
+	user.numberOfCompletedTasks = numberOfCompletedTasks
+
 	let completedTasksColor = calculateTasks(
 		numberOfCompletedTasks,
 		numberOfTasks

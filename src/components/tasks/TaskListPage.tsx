@@ -61,7 +61,10 @@ const TaskListPage: FC = () => {
 				tasks={localTasks}
 			/>
 			<ActionPanel
-				options={['title', 'completed']}
+				options={[
+					{ value: 'title', title: 'title' },
+					{ value: 'completed', title: 'completed' }
+				]}
 				btnTitle="Add task"
 				items={localTasks}
 				setItems={setSortedTasks}

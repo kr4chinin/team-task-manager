@@ -100,7 +100,11 @@ const UserListPage: FC = () => {
 			/>
 			<ActionPanel
 				onClick={() => setIsAddingUser(true)}
-				options={['name', 'email']}
+				options={[
+					{ value: 'name' as keyof IUser, title: 'name' },
+					{ value: 'email', title: 'email' },
+					{ value: 'numberOfCompletedTasks', title: 'completed tasks' }
+				]}
 				btnTitle="Add user"
 				items={users}
 				setItems={setSortedUsers}

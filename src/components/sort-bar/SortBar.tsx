@@ -4,11 +4,11 @@ import './SortBar.module.css'
 interface SortBarProps<T> {
 	items: T[]
 	setItems: (items: T[]) => void
-	options: Array<Extract<keyof T, string>>
+	options: Array<{ value: Extract<keyof T, string>; title: string }>
 }
 
 function SortBar<T>({ items, setItems, options }: SortBarProps<T>) {
-	const [value, setValue] = useState<keyof T>(options[0])
+	const [value, setValue] = useState<keyof T>(options[0].value)
 
 	function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
 		setValue(e.target.value as keyof T)
@@ -25,6 +25,9 @@ function SortBar<T>({ items, setItems, options }: SortBarProps<T>) {
 				if (typeof x === 'boolean' && typeof y === 'boolean') {
 					return String(y).localeCompare(String(x))
 				}
+				if (typeof x === 'number' && typeof y === 'number') {
+					return y - x
+				}
 				return 0
 			})
 		)
@@ -33,8 +36,8 @@ function SortBar<T>({ items, setItems, options }: SortBarProps<T>) {
 	return (
 		<select onChange={handleChange}>
 			{options.map(option => (
-				<option key={option} value={option}>
-					{option}
+				<option key={option.value} value={option.value}>
+					{option.title}
 				</option>
 			))}
 		</select>

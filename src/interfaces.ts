@@ -2,6 +2,7 @@ export interface IUser {
 	id: number
 	name: string
 	email: string
+	numberOfCompletedTasks?: number
 }
 
 export interface ITask {

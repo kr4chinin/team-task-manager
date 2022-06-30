@@ -8,7 +8,7 @@ interface ActionPanelProps<T> {
 	items: T[]
 	setItems: (items: T[]) => void
 	searchBy: keyof T
-	options: Array<Extract<keyof T, string>>
+	options: Array<{ value: Extract<keyof T, string>; title: string }>
 	setFilter: (filter: string) => void
 	onClick: () => void
 }

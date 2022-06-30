@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import { useModalContext } from '../../../context/ModalContext'
 import { calculateTasks } from '../../../helpers/calculateTasks'
+import { saveWithEnter } from '../../../helpers/saveWithEnter'
 import { useEscape } from '../../../hooks/useEscape'
 import { IUser } from '../../../interfaces'
 import ActionBtn from '../../btns/ActionBtn'
@@ -98,19 +99,16 @@ const UserModal: FC<UserModalProps> = ({
 
 	useEscape(setIsUserOpen)
 
-	function handleSaveKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-		if (e.key === 'Enter') {
-			handleSave()
-		}
-	}
-
 	return createPortal(
 		<Modal
 			isOpen={isUserOpen}
 			setIsOpen={setIsUserOpen}
 			setIsEditing={setIsEditing}
 		>
-			<div className="content-and-btns" onKeyDown={handleSaveKeyDown}>
+			<div
+				className="content-and-btns"
+				onKeyDown={e => saveWithEnter(e, handleSave)}
+			>
 				<div
 					className={
 						isUserOpen ? 'user__modal-content active' : 'user__modal-content'
