@@ -1,0 +1,39 @@
+@import '../../../assets/fonts/ComicNeue/ComicNeue.css';
+
+.pop-up {
+	opacity: 0;
+	align-items: flex-end;
+	justify-content: center;
+	inset: 0;
+	display: flex;
+	position: fixed;
+	background: transparent;
+	pointer-events: none;
+}
+
+.pop-up.active {
+	opacity: 1;
+}
+
+.pop-up__content {
+    font-family: 'Comic Neue', sans-serif;
+    min-width: 400px;
+    height: 70px;
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+    background-color: yellowgreen;
+    opacity: 0;
+	margin-bottom: 10px;
+	font-weight: bold;
+	transform: translateX(-200px);
+	transition: 1s;
+}
+
+.pop-up__content.active {
+    opacity: 1;
+	transform: translateX(0);
+	pointer-events: all;
+}

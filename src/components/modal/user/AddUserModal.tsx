@@ -11,16 +11,19 @@ import { useEscape } from '../../../hooks/useEscape'
 interface AddUserModalProps {
 	users: IUser[]
 	setUsers: (users: IUser[]) => void
+	showPopUp: (isOpen: boolean) => void
 }
 
-const AddUserModal: FC<AddUserModalProps> = ({ users, setUsers }) => {
+const AddUserModal: FC<AddUserModalProps> = ({ users, setUsers, showPopUp }) => {
 	const { isAddingUser, setIsAddingUser } = useModalContext()
 
-	const [newUser, setNewUser] = useState({
+	const initialValue = {
 		name: '',
 		email: '',
-		id: JSON.parse(localStorage.getItem('users') as string)?.length + 1
-	})
+		id: 0
+	}
+
+	const [newUser, setNewUser] = useState(initialValue)
 
 	function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
 		setNewUser({ ...newUser, name: e.target.value })
@@ -40,23 +43,20 @@ const AddUserModal: FC<AddUserModalProps> = ({ users, setUsers }) => {
 	}
 
 	function handleSave() {
-		setUsers([newUser, ...users])
+		let user = {
+			...newUser,
+			id: users.length + 1
+		}
+		setUsers([user, ...users])
 		setIsAddingUser(false)
-		setNewUser({
-			name: '',
-			email: '',
-			id: newUser.id + 1
-		})
+		setNewUser(initialValue)
 		setIsGenereted(false)
+		showPopUp(true)
 	}
 
 	function handleCancel() {
 		setIsAddingUser(false)
-		setNewUser({
-			name: '',
-			email: '',
-			id: newUser.id
-		})
+		setNewUser({ ...initialValue })
 		setIsGenereted(false)
 	}
 
@@ -82,7 +82,7 @@ const AddUserModal: FC<AddUserModalProps> = ({ users, setUsers }) => {
 							id="new-avatar"
 							alt="User avatar"
 							src={
-								newUser ? `https://picsum.photos/id/${newUser.id + 10}/200` : ''
+								newUser ? `https://picsum.photos/id/${users.length + 11}/200` : ''
 							}
 						/>
 					) : (

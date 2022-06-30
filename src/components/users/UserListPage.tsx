@@ -14,6 +14,7 @@ import {
 } from '../../helpers/calculateTasks'
 import { ITask } from '../../interfaces'
 import AddUserModal from '../modal/user/AddUserModal'
+import PopUpNotification from '../modal/pop-up/PopUpNotification'
 
 const UserListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])
@@ -85,9 +86,25 @@ const UserListPage: FC = () => {
 
 	const { setIsAddingUser } = useModalContext()
 
+	const [ShowAddUserPopUp, setShowAddUserPopUp] = useState(false)
+
+	function handlePopUp() {
+		setShowAddUserPopUp(true)
+		setTimeout(() => {
+			setShowAddUserPopUp(false)
+		}, 2000)
+	}
+
 	return (
 		<>
-			<AddUserModal users={users} setUsers={setUsers} />
+			<PopUpNotification 
+				title='✅ User was successfully added!' 
+				isOpen={ShowAddUserPopUp} 
+				setIsOpen={setShowAddUserPopUp}
+				handlePopUp={handlePopUp} 
+				color='#2aa92a'
+				/>
+			<AddUserModal users={users} setUsers={setUsers} showPopUp={setShowAddUserPopUp}/>
 			<UserModal
 				users={users}
 				setUsers={setUsers}
