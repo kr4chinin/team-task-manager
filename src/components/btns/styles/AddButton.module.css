@@ -12,3 +12,8 @@
 	border-radius: 0.5em;
 	cursor: pointer;
 }
+
+.add-btn:disabled {
+	cursor: not-allowed;
+	background-color: #3a9ffd83;
+}

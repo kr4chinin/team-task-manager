@@ -7,14 +7,22 @@ import ActionBtn from '../../btns/ActionBtn'
 import { FC, useState } from 'react'
 import { IUser } from '../../../interfaces'
 import { useEscape } from '../../../hooks/useEscape'
+import { generateUserId } from '../../../helpers/generateId'
+import MaxUsersError from '../../error/MaxUsersError'
 
 interface AddUserModalProps {
 	users: IUser[]
 	setUsers: (users: IUser[]) => void
 	showPopUp: (isOpen: boolean) => void
+	timeoutId: any
 }
 
-const AddUserModal: FC<AddUserModalProps> = ({ users, setUsers, showPopUp }) => {
+const AddUserModal: FC<AddUserModalProps> = ({
+	users,
+	setUsers,
+	showPopUp,
+	timeoutId
+}) => {
 	const { isAddingUser, setIsAddingUser } = useModalContext()
 
 	const initialValue = {
@@ -42,10 +50,17 @@ const AddUserModal: FC<AddUserModalProps> = ({ users, setUsers, showPopUp }) => 
 		e.stopPropagation()
 	}
 
+	const [maxUsersWarning, setMaxUsersWarning] = useState(false)
+
 	function handleSave() {
+		clearInterval(timeoutId)
+		if (+(localStorage.getItem('id') as string) === 500) {
+			setMaxUsersWarning(true)
+			return 
+		}
 		let user = {
 			...newUser,
-			id: users.length + 1
+			id: generateUserId(users ,setMaxUsersWarning)
 		}
 		setUsers([user, ...users])
 		setIsAddingUser(false)
@@ -68,6 +83,12 @@ const AddUserModal: FC<AddUserModalProps> = ({ users, setUsers, showPopUp }) => 
 
 	useEscape(setIsAddingUser)
 
+	if (maxUsersWarning) {
+		return (
+			<MaxUsersError setMaxUserWarning={setMaxUsersWarning} />
+		) 
+	}
+
 	return createPortal(
 		<Modal isOpen={isAddingUser} setIsOpen={setIsAddingUser}>
 			<div className="content-and-btns" onKeyDown={handleSaveKeyDown}>
@@ -82,7 +103,9 @@ const AddUserModal: FC<AddUserModalProps> = ({ users, setUsers, showPopUp }) => 
 							id="new-avatar"
 							alt="User avatar"
 							src={
-								newUser ? `https://picsum.photos/id/${users.length + 11}/200` : ''
+								newUser
+									? `https://picsum.photos/id/${users.length + 11}/200`
+									: ''
 							}
 						/>
 					) : (

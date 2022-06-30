@@ -1,12 +1,12 @@
 import './PopUpNotification.css'
-import {FC, useEffect} from 'react'
+import { FC, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 interface PopUpNotificationProps {
-    isOpen: boolean
-    setIsOpen: (isOpen: boolean) => void
+	isOpen: boolean
+	setIsOpen: (isOpen: boolean) => void
 	handlePopUp: () => void
-    title: string
+	title: string
 	color?: string
 }
 
@@ -14,10 +14,9 @@ const PopUpNotification: FC<PopUpNotificationProps> = ({
 	isOpen,
 	setIsOpen,
 	handlePopUp,
-    title,
+	title,
 	color
 }) => {
-
 	function handleClose() {
 		setIsOpen(false)
 	}
@@ -26,17 +25,17 @@ const PopUpNotification: FC<PopUpNotificationProps> = ({
 		if (isOpen) {
 			handlePopUp()
 		}
-	}, [isOpen])
+	}, [isOpen, handlePopUp])
 
 	return createPortal(
 		<div className={isOpen ? 'pop-up active' : 'pop-up'}>
-			<div 
-				className={isOpen ? 'pop-up__content active' : 'pop-up__content'} 
+			<div
+				className={isOpen ? 'pop-up__content active' : 'pop-up__content'}
 				onClick={handleClose}
-				style={{backgroundColor: color ? color : 'lightgreen'}}
+				style={{ backgroundColor: color ? color : 'lightgreen' }}
 			>
-                <p>{title}</p>
-            </div>
+				<p>{title}</p>
+			</div>
 		</div>,
 		document.getElementById('pop-up-notification-portal')!
 	)

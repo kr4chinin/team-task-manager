@@ -4,11 +4,12 @@ import cl from './styles/AddButton.module.css'
 interface AddBtnProps {
 	title: string
 	onClick: () => void
+	disabled?: boolean
 }
 
-const AddBtn: FC<AddBtnProps> = ({ title, onClick }) => {
+const AddBtn: FC<AddBtnProps> = ({ title, onClick, disabled}) => {
 	return (
-		<button onClick={onClick} className={cl['add-btn']}>
+		<button disabled={disabled ? disabled : false} onClick={onClick} className={cl['add-btn']}>
 			{title}
 		</button>
 	)

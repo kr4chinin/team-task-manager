@@ -11,6 +11,7 @@ interface ActionPanelProps<T> {
 	options: Array<{ value: Extract<keyof T, string>; title: string }>
 	setFilter: (filter: string) => void
 	onClick: () => void
+	isDisabled?: boolean
 }
 
 function ActionPanel<T>({
@@ -20,11 +21,12 @@ function ActionPanel<T>({
 	searchBy,
 	options,
 	setFilter,
-	onClick
+	onClick,
+	isDisabled
 }: ActionPanelProps<T>) {
 	return (
 		<div className={cl.container}>
-			<AddBtn title={btnTitle} onClick={onClick} />
+			<AddBtn title={btnTitle} onClick={onClick} disabled={isDisabled}/>
 			<div className={cl['search-sort-container']}>
 				<SearchBar
 					items={items}

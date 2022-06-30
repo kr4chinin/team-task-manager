@@ -1,11 +1,11 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import List from '../List'
 import UserItem from './UserItem'
 import { IUser } from '../../interfaces'
 import ActionPanel from '../action-panel/ActionPanel'
 import { useFetching } from '../../hooks/useFetching'
 import Loader from '../loader/Loader'
-import Error from '../error/Error'
+import CommonError from '../error/CommonError'
 import { useModalContext } from '../../context/ModalContext'
 import UserModal from '../modal/user/UserModal'
 import {
@@ -24,6 +24,9 @@ const UserListPage: FC = () => {
 		setTasks
 	)
 
+	let addTimeoutId = useRef<any>()
+	let deleteTimeoutId = useRef<any>()
+  
 	useEffect(() => {
 		if (localStorage.getItem('tasks') === null) {
 			executeTasks()
@@ -50,6 +53,10 @@ const UserListPage: FC = () => {
 		'https://jsonplaceholder.typicode.com/users',
 		setUsers
 	)
+
+	if (status === 'error') {
+		localStorage.clear()
+	}
 
 	useEffect(() => {
 		if (localStorage.getItem('users') === null) {
@@ -86,25 +93,51 @@ const UserListPage: FC = () => {
 
 	const { setIsAddingUser } = useModalContext()
 
-	const [ShowAddUserPopUp, setShowAddUserPopUp] = useState(false)
+	const [showAddUserPopUp, setShowAddUserPopUp] = useState(false)
+	const [showDeleteUserPopUp, setShowDeleteUserPopUp] = useState(false)
 
-	function handlePopUp() {
+	function handleAddPopUp() {
+		if (addTimeoutId.current) {
+			clearTimeout(addTimeoutId.current)
+		}
 		setShowAddUserPopUp(true)
-		setTimeout(() => {
+		addTimeoutId.current = setTimeout(() => {
 			setShowAddUserPopUp(false)
+		}, 2000)
+	}
+
+	function handleDeletePopUp() {
+		if (deleteTimeoutId.current) {
+			clearTimeout(deleteTimeoutId.current)
+		}
+		setShowDeleteUserPopUp(true)
+		deleteTimeoutId.current = setTimeout(() => {
+			setShowDeleteUserPopUp(false)
 		}, 2000)
 	}
 
 	return (
 		<>
-			<PopUpNotification 
-				title='✅ User was successfully added!' 
-				isOpen={ShowAddUserPopUp} 
+			<PopUpNotification
+				title="✅ User was successfully added!"
+				isOpen={showAddUserPopUp}
 				setIsOpen={setShowAddUserPopUp}
-				handlePopUp={handlePopUp} 
-				color='#2aa92a'
-				/>
-			<AddUserModal users={users} setUsers={setUsers} showPopUp={setShowAddUserPopUp}/>
+				handlePopUp={handleAddPopUp}
+				color="#2aa92a"
+			/>
+			<PopUpNotification
+				title="⛔️ User was successfully deleted!"
+				isOpen={showDeleteUserPopUp}
+				setIsOpen={setShowDeleteUserPopUp}
+				handlePopUp={handleDeletePopUp}
+				color="#dc4236"
+			/>
+			<AddUserModal
+				users={users}
+				setUsers={setUsers}
+				showPopUp={setShowAddUserPopUp}
+				timeoutId={addTimeoutId.current}
+			/>
 			<UserModal
 				users={users}
 				setUsers={setUsers}
@@ -114,8 +147,10 @@ const UserListPage: FC = () => {
 					currentUser?.id,
 					calcTasks
 				)}
+				showPopUp={setShowDeleteUserPopUp}
 			/>
 			<ActionPanel
+				isDisabled={users.length === 500}
 				onClick={() => setIsAddingUser(true)}
 				options={[
 					{ value: 'name' as keyof IUser, title: 'name' },
@@ -129,7 +164,7 @@ const UserListPage: FC = () => {
 				setFilter={setFilter}
 			/>
 			{status === 'loading' ? <Loader /> : null}
-			{status === 'error' ? <Error /> : null}
+			{status === 'error' ? <CommonError /> : null}
 			<List
 				items={sortedUsers}
 				renderItem={(user: IUser) => (

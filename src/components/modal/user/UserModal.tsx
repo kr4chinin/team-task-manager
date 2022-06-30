@@ -16,6 +16,7 @@ interface UserModalProps {
 	numberOfCompletedTasks: number
 	users: IUser[]
 	setUsers: (users: IUser[]) => void
+	showPopUp: (isOpen: boolean) => void
 }
 
 const UserModal: FC<UserModalProps> = ({
@@ -23,7 +24,8 @@ const UserModal: FC<UserModalProps> = ({
 	numberOfCompletedTasks,
 	numberOfTasks,
 	users,
-	setUsers
+	setUsers,
+	showPopUp
 }) => {
 	let completedTasksColor = calculateTasks(
 		numberOfCompletedTasks,
@@ -53,6 +55,7 @@ const UserModal: FC<UserModalProps> = ({
 	}
 
 	function handleDelete() {
+		showPopUp(true)
 		setUsers(users.filter(u => u.id !== user.id))
 		setIsUserOpen(false)
 	}
@@ -164,6 +167,7 @@ const UserModal: FC<UserModalProps> = ({
 				{!isEditing ? (
 					<div className="btns-container" onClick={handleBtnClick}>
 						<ActionBtn
+							
 							title="Edit user"
 							color="#F7A400"
 							width="244px"
