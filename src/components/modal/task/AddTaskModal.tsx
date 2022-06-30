@@ -1,48 +1,55 @@
+import { createPortal } from 'react-dom'
 import './styles/TaskModal.css'
 import Modal from '../modal-template/Modal'
 import { useModalContext } from '../../../context/ModalContext'
+import { useState, FC } from 'react'
 import { ITask } from '../../../interfaces'
-import React, { FC, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import ActionBtn from '../../btns/ActionBtn'
-import { createPortal } from 'react-dom'
 import { useEscape } from '../../../hooks/useEscape'
 
-interface TaskModalProps {
-	task: ITask
+interface AddTaskModalProps {
 	tasks: ITask[]
 	setTasks: (tasks: ITask[]) => void
 }
 
-const TaskModal: FC<TaskModalProps> = ({ task, tasks, setTasks }) => {
-	const { isTaskOpen, setIsTaskOpen } = useModalContext()
-	const [editedTitle, setEditedTitle] = useState('default')
+const AddTaskModal: FC<AddTaskModalProps> = ({ tasks, setTasks }) => {
+	const { isAddingTask, setIsAddingTask } = useModalContext()
 
-	useEffect(() => {
-		task ? setEditedTitle(task.title) : setEditedTitle('default')
-	}, [task])
+	const params = useParams()
+
+	const initialValue = {
+		title: '',
+		id: 0,
+		userId: params.id ? +params.id : 0,
+		completed: false
+	}
+
+	const [newTask, setNewTask] = useState<ITask>(initialValue)
 
 	function handlePropagation(e: React.MouseEvent<HTMLDivElement>) {
 		e.stopPropagation()
 	}
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setEditedTitle(e.target.value)
+		setNewTask({ ...newTask, title: e.target.value })
 	}
 
 	function handleCancel() {
-		setIsTaskOpen(false)
-		task ? setEditedTitle(task.title) : setEditedTitle('default')
+		setIsAddingTask(false)
+		setNewTask(initialValue)
 	}
 
 	function handleSave() {
-		let editedTask: ITask = task
-		task.title = editedTitle
-
-		setTasks([...tasks.filter(t => t.id !== task.id), editedTask])
-		setIsTaskOpen(false)
+		let task = {
+			...newTask,
+			id: tasks.length + 1
+		}
+		setTasks([task, ...tasks])
+		setIsAddingTask(false)
 	}
 
-	useEscape(setIsTaskOpen)
+	useEscape(setIsAddingTask)
 
 	function handleSaveKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
 		if (e.key === 'Enter') {
@@ -51,18 +58,18 @@ const TaskModal: FC<TaskModalProps> = ({ task, tasks, setTasks }) => {
 	}
 
 	return createPortal(
-		<Modal isOpen={isTaskOpen} setIsOpen={setIsTaskOpen}>
+		<Modal isOpen={isAddingTask} setIsOpen={setIsAddingTask}>
 			<div className="task-modal-container" onKeyDown={handleSaveKeyDown}>
 				<div
 					onClick={handlePropagation}
 					className={
-						isTaskOpen ? 'task__modal-content active' : 'task__modal-content'
+						isAddingTask ? 'task__modal-content active' : 'task__modal-content'
 					}
 				>
-					<p id="task-icon">📃</p>
+					<p id="task-icon">📄</p>
 					<input
 						className="edit-title-input"
-						value={editedTitle}
+						value={newTask.title}
 						onChange={handleChange}
 					/>
 				</div>
@@ -86,4 +93,4 @@ const TaskModal: FC<TaskModalProps> = ({ task, tasks, setTasks }) => {
 	)
 }
 
-export default TaskModal
+export default AddTaskModal

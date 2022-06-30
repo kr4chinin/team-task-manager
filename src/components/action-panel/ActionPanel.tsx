@@ -24,7 +24,7 @@ function ActionPanel<T>({
 }: ActionPanelProps<T>) {
 	return (
 		<div className={cl.container}>
-			<AddBtn title={btnTitle} onClick={onClick}/>
+			<AddBtn title={btnTitle} onClick={onClick} />
 			<div className={cl['search-sort-container']}>
 				<SearchBar
 					items={items}

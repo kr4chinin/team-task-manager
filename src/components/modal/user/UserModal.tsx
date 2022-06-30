@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import { useModalContext } from '../../../context/ModalContext'
 import { calculateTasks } from '../../../helpers/calculateTasks'
+import { useEscape } from '../../../hooks/useEscape'
 import { IUser } from '../../../interfaces'
 import ActionBtn from '../../btns/ActionBtn'
 import Modal from '../modal-template/Modal'
@@ -95,19 +96,7 @@ const UserModal: FC<UserModalProps> = ({
 		})
 	}
 
-	useEffect(() => {
-		document.addEventListener('keydown', e => {
-			if (e.key === 'Escape') {
-				setIsUserOpen(false)
-			}
-		})
-		return () =>
-			document.removeEventListener('keydown', e => {
-				if (e.key === 'Escape') {
-					setIsUserOpen(false)
-				}
-			})
-	})
+	useEscape(setIsUserOpen)
 
 	function handleSaveKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
 		if (e.key === 'Enter') {

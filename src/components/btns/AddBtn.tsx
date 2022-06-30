@@ -7,7 +7,11 @@ interface AddBtnProps {
 }
 
 const AddBtn: FC<AddBtnProps> = ({ title, onClick }) => {
-	return <button onClick={onClick} className={cl['add-btn']}>{title}</button>
+	return (
+		<button onClick={onClick} className={cl['add-btn']}>
+			{title}
+		</button>
+	)
 }
 
 export default AddBtn

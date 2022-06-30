@@ -83,11 +83,11 @@ const UserListPage: FC = () => {
 		}
 	}, [tasks])
 
-	const { setIsAddingUser } = useModalContext() 
+	const { setIsAddingUser } = useModalContext()
 
 	return (
 		<>
-			<AddUserModal users={users} setUsers={setUsers}/>
+			<AddUserModal users={users} setUsers={setUsers} />
 			<UserModal
 				users={users}
 				setUsers={setUsers}

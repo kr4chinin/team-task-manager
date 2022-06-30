@@ -8,12 +8,11 @@
 }
 
 .add-user-info-container {
-    display: flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	height: 180px;
 	margin-right: 20px;
-
 }
 
 .add-name-input,
@@ -29,35 +28,35 @@
 }
 
 .add-email-input {
-    width: 450px;
+	width: 450px;
 	height: 40px;
 	font-size: 22px;
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 #new-avatar {
-    height: 180px;
+	height: 180px;
 	width: 280px;
 	border: 4px solid white;
 }
 
 .generate-avatar {
-    height: 180px;
+	height: 180px;
 	width: 280px;
 	border: 4px solid white;
-    background-color: rgb(135, 207, 235);
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
-    cursor: pointer;
+	background-color: rgb(135, 207, 235);
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	padding: 1em;
+	cursor: pointer;
 }
 
 #generate-avatar-title {
-    color: black;
-    font-weight: bold;
-    font-size: 20px;
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
 }
 
 .add-name-input:focus,

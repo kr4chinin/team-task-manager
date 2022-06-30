@@ -6,6 +6,7 @@ import List from '../List'
 import TaskItem from './TaskItem'
 import { useModalContext } from '../../context/ModalContext'
 import TaskModal from '../modal/task/TaskModal'
+import AddTaskModal from '../modal/task/AddTaskModal'
 
 type TasksParams = {
 	id: string
@@ -49,8 +50,11 @@ const TaskListPage: FC = () => {
 		localStorage.setItem('tasks', JSON.stringify(x))
 	}, [sortedTasks, params.id, localTasks, globalTasks])
 
+	const { setIsAddingTask } = useModalContext()
+
 	return (
 		<>
+			<AddTaskModal tasks={localTasks} setTasks={setLocalTasks} />
 			<TaskModal
 				task={currentTask}
 				setTasks={setLocalTasks}
@@ -63,7 +67,7 @@ const TaskListPage: FC = () => {
 				setItems={setSortedTasks}
 				searchBy="title"
 				setFilter={setFilter}
-				onClick={() => console.log(1)}
+				onClick={() => setIsAddingTask(true)}
 			/>
 			<List
 				items={sortedTasks}
