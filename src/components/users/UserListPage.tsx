@@ -103,7 +103,7 @@ const UserListPage: FC = () => {
 		setShowAddUserPopUp(true)
 		addTimeoutId.current = setTimeout(() => {
 			setShowAddUserPopUp(false)
-		}, 2000)
+		}, 1500)
 	}
 
 	function handleDeletePopUp() {
@@ -113,7 +113,7 @@ const UserListPage: FC = () => {
 		setShowDeleteUserPopUp(true)
 		deleteTimeoutId.current = setTimeout(() => {
 			setShowDeleteUserPopUp(false)
-		}, 2000)
+		}, 1500)
 	}
 
 	return (
