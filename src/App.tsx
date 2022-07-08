@@ -1,13 +1,13 @@
 import Navbar from './components/navbar/Navbar'
 import './styles/App.css'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import AppRoutes from './components/AppRoutes'
 import { ModalContextProvider } from './context/ModalContext'
 import WelcomeModal from './components/modal/welcome-modal/WelcomeModal'
 
 function App() {
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<ModalContextProvider>
 				<WelcomeModal />
 				<Navbar />
@@ -15,7 +15,7 @@ function App() {
 					<AppRoutes />
 				</div>
 			</ModalContextProvider>
-		</BrowserRouter>
+		</HashRouter>
 	)
 }
 

@@ -17,7 +17,7 @@ const Information = () => {
 				</p>
 				<br />
 				<p>
-					This app allows you to coordinate command work. You can create
+					This app allows you to coordinate team work. You can create
 					accounts for your team members and give them various tasks. On the
 					main screen (where user list is located) you will see how many tasks
 					each user has and how many tasks he had yet completed. Number of
@@ -26,7 +26,7 @@ const Information = () => {
 				<br />
 				<ul>
 					<li>
-						<span className={cl.red}>Red</span> - user completed less then{' '}
+						<span className={cl.red}>Red</span> - user completed less than{' '}
 						<b>50%</b> of tasks
 					</li>
 					<li>
@@ -51,9 +51,9 @@ const Information = () => {
 				<h4>2️⃣ How to give user a task?</h4>
 				<br />
 				<p>
-					Click on <b>user</b> you want to give a task to and you will see that
+					Click on the <b>user</b> you want to give a task to and you will see that
 					modal window has opened. Press <i>"Open tasks" </i>button and you will
-					see that task page has been opened. Here you can add tasks for a user
+					see that task page has been opened. Here you can add tasks
 					by pressing <i>"Add task"</i> button.
 				</p>
 				<br />
@@ -75,7 +75,7 @@ const Information = () => {
 				<ul>
 					<li>
 						<b>Search bar</b> - enter a string and you will see that tasks/users
-						which don't have this string in the title/name will disappear from
+						which don't have this string in their title/name will disappear from
 						the page. Moreover, entered string will be{' '}
 						<span className={cl.highlighted}>highlighted</span> in remaining
 						tasks/users title/name.
