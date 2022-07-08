@@ -14,14 +14,12 @@ interface AddUserModalProps {
 	users: IUser[]
 	setUsers: (users: IUser[]) => void
 	showPopUp: (isOpen: boolean) => void
-	timeoutId: any
 }
 
 const AddUserModal: FC<AddUserModalProps> = ({
 	users,
 	setUsers,
-	showPopUp,
-	timeoutId
+	showPopUp
 }) => {
 	const { isAddingUser, setIsAddingUser } = useModalContext()
 
@@ -53,7 +51,6 @@ const AddUserModal: FC<AddUserModalProps> = ({
 	const [maxUsersWarning, setMaxUsersWarning] = useState(false)
 
 	function handleSave() {
-		clearInterval(timeoutId)
 		if (+(localStorage.getItem('id') as string) === 500) {
 			setMaxUsersWarning(true)
 			return

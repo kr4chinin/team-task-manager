@@ -11,3 +11,11 @@ export interface ITask {
 	title: string
 	completed: boolean
 }
+
+export interface IPopUp {
+	title: string
+	isOpen: boolean
+	setIsOpen: (isOpen: boolean) => void
+	handlePopUp: () => void
+	color: string
+}

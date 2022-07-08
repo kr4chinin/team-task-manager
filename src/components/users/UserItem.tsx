@@ -1,7 +1,7 @@
+import cl from './styles/UserItem.module.css'
 import { FC } from 'react'
 import { IUser } from '../../interfaces'
 import Highlight from '../../helpers/highlighter/Highlight'
-import cl from './styles/UserItem.module.css'
 import { calculateTasks } from '../../helpers/calculateTasks'
 
 interface UserItemProps {

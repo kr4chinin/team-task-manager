@@ -1,28 +1,39 @@
-import React, { FC } from 'react'
+import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import Modal from '../modal-template/Modal'
 import './WelcomeModal.css'
 import { Link } from 'react-router-dom'
+import { useModalContext } from '../../../context/ModalContext'
 
-interface WelcomeModalProps {
-	isOpen: boolean
-	setIsOpen: (isOpen: boolean) => void
-}
+const WelcomeModal = () => {
+	const { isWelcomeOpen, setIsWelcomeOpen } = useModalContext()
 
-const WelcomeModal: FC<WelcomeModalProps> = ({ isOpen, setIsOpen }) => {
+	// show welcoming modal window when user entered the app first time
+	useEffect(() => {
+		let firstAuth = JSON.parse(localStorage.getItem('firstAuth') as string)
+		if (!firstAuth) {
+			localStorage.setItem('firstAuth', 'false')
+		}
+		if (firstAuth === null) {
+			setIsWelcomeOpen(true)
+		}
+	}, [setIsWelcomeOpen])
+
 	function handleStopPropagation(e: React.MouseEvent<HTMLDivElement>) {
 		e.stopPropagation()
 	}
 
 	function handleClose() {
-		setIsOpen(false)
+		setIsWelcomeOpen(false)
 	}
 
 	return createPortal(
-		<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+		<Modal isOpen={isWelcomeOpen} setIsOpen={setIsWelcomeOpen}>
 			<div
 				className={
-					isOpen ? 'welcome-modal__content active' : 'welcome-modal__content'
+					isWelcomeOpen
+						? 'welcome-modal__content active'
+						: 'welcome-modal__content'
 				}
 				onClick={handleStopPropagation}
 			>

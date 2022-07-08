@@ -17,6 +17,7 @@ export const ModalContextProvider: FC<ModalContextProviderProps> = ({
 	const [isTaskOpen, setIsTaskOpen] = useState(false)
 	const [isAddingUser, setIsAddingUser] = useState(false)
 	const [isAddingTask, setIsAddingTask] = useState(false)
+	const [isWelcomeOpen, setIsWelcomeOpen] = useState(false)
 
 	return (
 		<ModalContext.Provider
@@ -28,7 +29,9 @@ export const ModalContextProvider: FC<ModalContextProviderProps> = ({
 				isAddingUser,
 				setIsAddingUser,
 				isAddingTask,
-				setIsAddingTask
+				setIsAddingTask,
+				isWelcomeOpen,
+				setIsWelcomeOpen
 			}}
 		>
 			{children}

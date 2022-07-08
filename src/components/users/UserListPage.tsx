@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import List from '../List'
 import UserItem from './UserItem'
 import { IUser } from '../../interfaces'
@@ -14,9 +14,9 @@ import {
 } from '../../helpers/calculateTasks'
 import { ITask } from '../../interfaces'
 import AddUserModal from '../modal/user/AddUserModal'
-import PopUpNotification from '../modal/pop-up/PopUpNotification'
 import { CSSTransition } from 'react-transition-group'
 import '../../styles/List.css'
+import UserPopUps from './UserPopUps'
 
 const UserListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])
@@ -25,9 +25,6 @@ const UserListPage: FC = () => {
 		`https://jsonplaceholder.typicode.com/todos`,
 		setTasks
 	)
-
-	let addTimeoutId = useRef<any>()
-	let deleteTimeoutId = useRef<any>()
 
 	useEffect(() => {
 		if (localStorage.getItem('tasks') === null) {
@@ -98,47 +95,18 @@ const UserListPage: FC = () => {
 	const [showAddUserPopUp, setShowAddUserPopUp] = useState(false)
 	const [showDeleteUserPopUp, setShowDeleteUserPopUp] = useState(false)
 
-	function handleAddPopUp() {
-		if (addTimeoutId.current) {
-			clearTimeout(addTimeoutId.current)
-		}
-		setShowAddUserPopUp(true)
-		addTimeoutId.current = setTimeout(() => {
-			setShowAddUserPopUp(false)
-		}, 1500)
-	}
-
-	function handleDeletePopUp() {
-		if (deleteTimeoutId.current) {
-			clearTimeout(deleteTimeoutId.current)
-		}
-		setShowDeleteUserPopUp(true)
-		deleteTimeoutId.current = setTimeout(() => {
-			setShowDeleteUserPopUp(false)
-		}, 1500)
-	}
-
 	return (
 		<>
-			<PopUpNotification
-				title="✅ User was successfully added!"
-				isOpen={showAddUserPopUp}
-				setIsOpen={setShowAddUserPopUp}
-				handlePopUp={handleAddPopUp}
-				color="#2d9f32"
-			/>
-			<PopUpNotification
-				title="⛔️ User was successfully deleted!"
-				isOpen={showDeleteUserPopUp}
-				setIsOpen={setShowDeleteUserPopUp}
-				handlePopUp={handleDeletePopUp}
-				color="#dc4236"
+			<UserPopUps
+				showAdd={showAddUserPopUp}
+				setShowAdd={setShowAddUserPopUp}
+				showDelete={showDeleteUserPopUp}
+				setShowDelete={setShowDeleteUserPopUp}
 			/>
 			<AddUserModal
 				users={users}
 				setUsers={setUsers}
 				showPopUp={setShowAddUserPopUp}
-				timeoutId={addTimeoutId.current}
 			/>
 			<UserModal
 				tasks={tasks}

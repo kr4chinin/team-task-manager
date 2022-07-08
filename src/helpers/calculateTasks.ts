@@ -1,6 +1,10 @@
 import { ITask } from '../interfaces'
 
 export const calculateTasks = (numberOfCompleted: number, number: number) => {
+	if (number === 0) {
+		return 'red'
+	}
+
 	const percentage = (numberOfCompleted / number) * 100
 
 	if (percentage >= 0 && percentage <= 50) {

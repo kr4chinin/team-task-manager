@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useRef } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ITask } from '../../interfaces'
 import ActionPanel from '../action-panel/ActionPanel'
@@ -7,9 +7,9 @@ import TaskItem from './TaskItem'
 import { useModalContext } from '../../context/ModalContext'
 import TaskModal from '../modal/task/TaskModal'
 import AddTaskModal from '../modal/task/AddTaskModal'
-import PopUpNotification from '../modal/pop-up/PopUpNotification'
 import { CSSTransition } from 'react-transition-group'
 import '../../styles/List.css'
+import TaskPopUps from './TaskPopUps'
 
 type TasksParams = {
 	id: string
@@ -55,66 +55,19 @@ const TaskListPage: FC = () => {
 
 	const { setIsAddingTask } = useModalContext()
 
-	let addTimeoutId = useRef<any>()
-	let deleteTimeoutId = useRef<any>()
-	let completeTimeoutId = useRef<any>()
-
 	const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false)
 	const [showCompleteTaskPopUp, setShowCompleteTaskPopUp] = useState(false)
 	const [showDeleteTaskPopUp, setShowDeleteTaskPopUp] = useState(false)
 
-	function handleAddPopUp() {
-		if (addTimeoutId.current) {
-			clearTimeout(addTimeoutId.current)
-		}
-		setShowAddTaskPopUp(true)
-		addTimeoutId.current = setTimeout(() => {
-			setShowAddTaskPopUp(false)
-		}, 1500)
-	}
-
-	function handleCompletePopUp() {
-		if (completeTimeoutId.current) {
-			clearTimeout(completeTimeoutId.current)
-		}
-		setShowCompleteTaskPopUp(true)
-		completeTimeoutId.current = setTimeout(() => {
-			setShowCompleteTaskPopUp(false)
-		}, 1500)
-	}
-
-	function handleDeletePopUp() {
-		if (deleteTimeoutId.current) {
-			clearTimeout(deleteTimeoutId.current)
-		}
-		setShowDeleteTaskPopUp(true)
-		deleteTimeoutId.current = setTimeout(() => {
-			setShowDeleteTaskPopUp(false)
-		}, 1500)
-	}
-
 	return (
 		<>
-			<PopUpNotification
-				title="✅ Task was successfully added!"
-				isOpen={showAddTaskPopUp}
-				setIsOpen={setShowAddTaskPopUp}
-				handlePopUp={handleAddPopUp}
-				color="#2d9f32"
-			/>
-			<PopUpNotification
-				title="⛔️ Task was successfully deleted!"
-				isOpen={showDeleteTaskPopUp}
-				setIsOpen={setShowDeleteTaskPopUp}
-				handlePopUp={handleDeletePopUp}
-				color="#dc4236"
-			/>
-			<PopUpNotification
-				title="🚀 Task was successfully completed!"
-				isOpen={showCompleteTaskPopUp}
-				setIsOpen={setShowCompleteTaskPopUp}
-				handlePopUp={handleCompletePopUp}
-				color="yellowgreen"
+			<TaskPopUps
+				showAdd={showAddTaskPopUp}
+				setShowAdd={setShowAddTaskPopUp}
+				showDelete={showDeleteTaskPopUp}
+				setShowDelete={setShowDeleteTaskPopUp}
+				showComplete={showCompleteTaskPopUp}
+				setShowComplete={setShowCompleteTaskPopUp}
 			/>
 			<AddTaskModal
 				tasks={localTasks}
