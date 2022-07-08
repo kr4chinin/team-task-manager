@@ -67,7 +67,7 @@ const UserModal: FC<UserModalProps> = ({
 
 	function handleClose() {
 		setIsUserOpen(false)
-		setIsEditing(false)
+		setTimeout(() => setIsEditing(false), 400)
 	}
 
 	function handleOpenTasks() {

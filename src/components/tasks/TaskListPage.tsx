@@ -19,7 +19,7 @@ const TaskListPage: FC = () => {
 	const [globalTasks, setGlobalTasks] = useState<ITask[]>([])
 	const [localTasks, setLocalTasks] = useState<ITask[]>([])
 	const [sortedTasks, setSortedTasks] = useState<ITask[]>([])
-	const [currentTask, setCurrentTask] = useState<any>()
+	const [currentTask, setCurrentTask] = useState<ITask | null>(null)
 
 	const [filter, setFilter] = useState('')
 	const { setIsTaskOpen } = useModalContext()
@@ -48,9 +48,9 @@ const TaskListPage: FC = () => {
 	}, [params.id])
 
 	useEffect(() => {
-		let t = globalTasks.filter(t => String(t.userId) !== params.id)
-		let x = t.concat(...sortedTasks)
-		localStorage.setItem('tasks', JSON.stringify(x))
+		let globalTasksWithoutCurrentTasks = globalTasks.filter(t => String(t.userId) !== params.id)
+		let updatedGlobalTasks = globalTasksWithoutCurrentTasks.concat(...sortedTasks)
+		localStorage.setItem('tasks', JSON.stringify(updatedGlobalTasks))
 	}, [sortedTasks, params.id, localTasks, globalTasks])
 
 	const { setIsAddingTask } = useModalContext()
@@ -75,7 +75,7 @@ const TaskListPage: FC = () => {
 				showPopUp={setShowAddTaskPopUp}
 			/>
 			<TaskModal
-				task={currentTask}
+				task={currentTask as ITask}
 				setTasks={setLocalTasks}
 				tasks={localTasks}
 			/>

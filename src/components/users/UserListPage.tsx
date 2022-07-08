@@ -39,12 +39,17 @@ const UserListPage: FC = () => {
 
 	useEffect(() => {
 		localStorage.setItem('tasks', JSON.stringify(tasks))
+
+		let tasksFromStorage = localStorage.getItem('tasks')
+		if (typeof tasksFromStorage === 'string') {
+			setCalcTasks(JSON.parse(tasksFromStorage))
+		}
 	}, [tasks])
 
 	const [users, setUsers] = useState<IUser[]>([])
 	const [sortedUsers, setSortedUsers] = useState<IUser[]>([])
 	const [filter, setFilter] = useState('')
-	const [currentUser, setCurrentUser] = useState<any>()
+	const [currentUser, setCurrentUser] = useState<IUser | null>(null)
 
 	const { setIsUserOpen } = useModalContext()
 
@@ -83,13 +88,6 @@ const UserListPage: FC = () => {
 
 	const [calcTasks, setCalcTasks] = useState<ITask[]>([])
 
-	useEffect(() => {
-		let tasksFromStorage = localStorage.getItem('tasks')
-		if (typeof tasksFromStorage === 'string') {
-			setCalcTasks(JSON.parse(tasksFromStorage))
-		}
-	}, [tasks])
-
 	const { setIsAddingUser } = useModalContext()
 
 	const [showAddUserPopUp, setShowAddUserPopUp] = useState(false)
@@ -113,10 +111,10 @@ const UserListPage: FC = () => {
 				setTasks={setTasks}
 				users={users}
 				setUsers={setUsers}
-				user={currentUser}
-				numberOfTasks={getNumberOfTasks(currentUser?.id, calcTasks)}
+				user={currentUser as IUser}
+				numberOfTasks={getNumberOfTasks(currentUser?.id as number, calcTasks)}
 				numberOfCompletedTasks={getNumberOfCompletedTasks(
-					currentUser?.id,
+					currentUser?.id as number,
 					calcTasks
 				)}
 				showPopUp={setShowDeleteUserPopUp}
