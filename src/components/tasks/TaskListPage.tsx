@@ -116,7 +116,11 @@ const TaskListPage: FC = () => {
 				handlePopUp={handleCompletePopUp}
 				color="yellowgreen"
 			/>
-			<AddTaskModal tasks={localTasks} setTasks={setLocalTasks} showPopUp={setShowAddTaskPopUp} />
+			<AddTaskModal
+				tasks={localTasks}
+				setTasks={setLocalTasks}
+				showPopUp={setShowAddTaskPopUp}
+			/>
 			<TaskModal
 				task={currentTask}
 				setTasks={setLocalTasks}
@@ -137,7 +141,7 @@ const TaskListPage: FC = () => {
 			<List
 				items={sortedTasks}
 				renderItem={(task: ITask) => (
-					<CSSTransition key={task.id} timeout={600} classNames='tasks'>
+					<CSSTransition key={task.id} timeout={600} classNames="tasks">
 						<div key={task.id} onClick={() => handleOpenModal(task.id)}>
 							<TaskItem
 								task={task}

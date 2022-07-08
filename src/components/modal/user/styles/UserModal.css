@@ -8,10 +8,13 @@
 	padding: 15px;
 	justify-content: space-between;
 	opacity: 0;
+	transform: scale(0.7);
 	background-color: #4d3bab;
+	transition: 650ms;
 }
 
 .user__modal-content.active {
+	transform: scale(1);
 	opacity: 1;
 }
 
@@ -95,6 +98,11 @@
 #close-cross {
 	font-size: 24px;
 	cursor: pointer;
+	transition: 400ms;
+}
+
+#close-cross:hover {
+	transform: translateY(3px);
 }
 
 #red {
@@ -119,6 +127,7 @@
 	margin-left: 17px;
 	padding: 0.3em;
 	border: 3px solid #d9d9d9;
+	transition: 400ms;
 }
 
 .edit-email-input {
@@ -131,4 +140,10 @@
 .edit-name-input:focus,
 .edit-email-input:focus {
 	color: black;
+}
+
+.edit-name-input:hover,
+.edit-email-input:hover {
+	transform: translateY(1px);
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.448);
 }

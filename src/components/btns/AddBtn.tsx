@@ -7,9 +7,13 @@ interface AddBtnProps {
 	disabled?: boolean
 }
 
-const AddBtn: FC<AddBtnProps> = ({ title, onClick, disabled}) => {
+const AddBtn: FC<AddBtnProps> = ({ title, onClick, disabled }) => {
 	return (
-		<button disabled={disabled ? disabled : false} onClick={onClick} className={cl['add-btn']}>
+		<button
+			disabled={disabled ? disabled : false}
+			onClick={onClick}
+			className={cl['add-btn']}
+		>
 			{title}
 		</button>
 	)

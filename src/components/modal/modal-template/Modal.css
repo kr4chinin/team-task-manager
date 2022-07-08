@@ -7,6 +7,8 @@
 	position: fixed;
 	background: rgba(0, 0, 0, 0.65);
 	pointer-events: none;
+	transition: 500ms;
+	z-index: 101;
 }
 
 .modal.active {

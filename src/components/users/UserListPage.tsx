@@ -172,7 +172,7 @@ const UserListPage: FC = () => {
 			<List
 				items={sortedUsers}
 				renderItem={(user: IUser) => (
-					<CSSTransition key={user.id} timeout={600} classNames='users'>
+					<CSSTransition key={user.id} timeout={600} classNames="users">
 						<div onClick={() => handleOpenModal(user.id)} key={user.id}>
 							<UserItem
 								user={user}
@@ -185,7 +185,6 @@ const UserListPage: FC = () => {
 							/>
 						</div>
 					</CSSTransition>
-
 				)}
 			/>
 		</>

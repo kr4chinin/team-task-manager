@@ -16,11 +16,16 @@
 }
 
 .container:hover {
-	transform: translateX(20px);
+	transform: scale(0.97);
 }
 
 #indicator {
 	font-size: 32px;
+	transition: 500ms;
+}
+
+#indicator:hover {
+	transform: rotate(360deg);
 }
 
 #title {
@@ -38,16 +43,22 @@
 
 #completeBtn {
 	font-size: 32px;
+	transition: 400ms;
+}
+
+#completeBtn:hover {
+	transform: scale(1.2);
 }
 
 #completed {
 	opacity: 0;
 }
 
-.completeBtn .completed {
-	opacity: 0;
-}
-
 #deleteBtn {
 	font-size: 30px;
+	transition: 400ms;
+}
+
+#deleteBtn:hover {
+	transform: scale(1.15);
 }

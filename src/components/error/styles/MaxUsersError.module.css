@@ -1,27 +1,25 @@
 @import '../../../assets/fonts/ComicNeue/ComicNeue.css';
 
 .container {
-    font-family: 'Comic Neue', sans-serif;
-    width: 680px;
-    height: fit-content;
-    background-color: lightcoral;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: left;
-    padding: 20px;
-    align-items: center;
-    margin-bottom: 47px;
+	font-family: 'Comic Neue', sans-serif;
+	width: 680px;
+	height: fit-content;
+	background-color: lightcoral;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: left;
+	padding: 20px;
+	align-items: center;
+	margin-bottom: 47px;
 }
 
 .title {
-    font-size: 32px;
-    font-weight: bolder;
+	font-size: 32px;
+	font-weight: bolder;
 }
 
 .error__paragraph {
-    margin: 20px;
-    font-size: 22px;
+	margin: 20px;
+	font-size: 22px;
 }
-
-

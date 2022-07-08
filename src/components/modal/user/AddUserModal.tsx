@@ -65,28 +65,26 @@ const AddUserModal: FC<AddUserModalProps> = ({
 		setUsers([user, ...users])
 		setIsAddingUser(false)
 		setNewUser(initialValue)
-		setIsGenereted(false)
+		setIsGenerated(false)
 		showPopUp(true)
 	}
 
 	function handleCancel() {
 		setIsAddingUser(false)
 		setNewUser({ ...initialValue })
-		setIsGenereted(false)
+		setTimeout(() => setIsGenerated(false), 650)
 	}
 
 	function handleGeneratePicture() {
-		setIsGenereted(true)
+		setIsGenerated(true)
 	}
 
-	const [isGenerated, setIsGenereted] = useState(false)
+	const [isGenerated, setIsGenerated] = useState(false)
 
 	useEscape(setIsAddingUser)
 
 	if (maxUsersWarning) {
-		return (
-			<MaxUsersError setMaxUserWarning={setMaxUsersWarning} />
-		)
+		return <MaxUsersError setMaxUserWarning={setMaxUsersWarning} />
 	}
 
 	return createPortal(
@@ -100,7 +98,7 @@ const AddUserModal: FC<AddUserModalProps> = ({
 				>
 					{isGenerated ? (
 						<img
-							id='generated-avatar'
+							className="generated-avatar"
 							alt="User avatar"
 							src={
 								newUser

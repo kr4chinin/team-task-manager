@@ -61,9 +61,7 @@ const UserModal: FC<UserModalProps> = ({
 	function handleDelete() {
 		showPopUp(true)
 		setUsers(users.filter(u => u.id !== user.id))
-		setTasks(tasks.filter(t => 
-			t.userId !== user.id
-		))
+		setTasks(tasks.filter(t => t.userId !== user.id))
 		setIsUserOpen(false)
 	}
 
@@ -142,7 +140,9 @@ const UserModal: FC<UserModalProps> = ({
 								/>
 							)}
 							{!isEditing ? (
-								<p id="user-email">{user?.email ? `e-mail: ${user?.email}` : ''}</p>
+								<p id="user-email">
+									{user?.email ? `e-mail: ${user?.email}` : ''}
+								</p>
 							) : (
 								<input
 									className="edit-email-input"
@@ -174,7 +174,6 @@ const UserModal: FC<UserModalProps> = ({
 				{!isEditing ? (
 					<div className="btns-container" onClick={handleBtnClick}>
 						<ActionBtn
-							
 							title="Edit user"
 							color="#F7A400"
 							width="244px"

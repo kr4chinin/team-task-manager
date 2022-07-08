@@ -30,7 +30,7 @@ const Highlight: FC<HighlightProps> = ({ filter, str }) => {
 			</>
 		)
 	}
-	return <>str</>
+	return <>{str}</>
 }
 
 export default Highlight

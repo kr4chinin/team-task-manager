@@ -1,8 +1,6 @@
 import React from 'react'
 import '../styles/List.css'
-import {
-	TransitionGroup,
-} from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group'
 
 interface ListProps<T> {
 	items: T[]
@@ -10,9 +8,5 @@ interface ListProps<T> {
 }
 
 export default function List<T>(props: ListProps<T>) {
-	return (
-		<TransitionGroup>
-			{props.items.map(props.renderItem)}
-		</TransitionGroup>
-	)
+	return <TransitionGroup>{props.items.map(props.renderItem)}</TransitionGroup>
 }

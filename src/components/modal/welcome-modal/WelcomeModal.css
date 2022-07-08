@@ -1,0 +1,68 @@
+@import '../../../assets/fonts/ComicNeue/ComicNeue.css';
+
+.welcome-modal__content {
+	font-family: 'Comic Neue', sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 720px;
+	height: 260px;
+	background-color: rgb(76, 188, 232);
+	text-align: left;
+	border-radius: 15px;
+	opacity: 0;
+	transform: scale(0.6);
+	transition: 650ms;
+}
+
+.welcome-modal__content.active {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.welcome__text-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 636px;
+	height: 260px;
+	background-color: rgb(76, 188, 232);
+	text-align: left;
+	padding: 20px;
+}
+
+.welcome__text {
+	font-size: 24px;
+}
+
+.welcome__close-btn-container {
+	width: 44px;
+	height: 260px;
+	padding-top: 20px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding-right: 20px;
+	font-size: 26px;
+	margin-top: 3px;
+}
+
+.welcome__close-btn {
+	cursor: pointer;
+	transition: 400ms;
+}
+
+.welcome__close-btn:hover {
+	transform: scale(1.15);
+}
+
+.welcome__decoration-bar {
+	height: 260px;
+	width: 40px;
+	background-color: #3e4491;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}

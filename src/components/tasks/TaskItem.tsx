@@ -12,7 +12,14 @@ interface TaskItemProps {
 	showPopUpComplete: (isShown: boolean) => void
 }
 
-const TaskItem: FC<TaskItemProps> = ({ task, filter, tasks, setTasks, showPopUpDelete, showPopUpComplete }) => {
+const TaskItem: FC<TaskItemProps> = ({
+	task,
+	filter,
+	tasks,
+	setTasks,
+	showPopUpDelete,
+	showPopUpComplete
+}) => {
 	const light = (str: string) => {
 		return <Highlight filter={filter} str={str} />
 	}

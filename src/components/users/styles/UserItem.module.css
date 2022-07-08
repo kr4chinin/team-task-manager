@@ -15,7 +15,7 @@
 }
 
 .container:hover {
-	transform: translateX(20px);
+	transform: scale(0.97);
 }
 
 .avatar {
@@ -66,5 +66,5 @@
 }
 
 .green {
-	color: green;
+	color: rgb(2, 153, 2);
 }

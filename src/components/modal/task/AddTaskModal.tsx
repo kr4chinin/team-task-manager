@@ -12,10 +12,14 @@ import { generateTaskId } from '../../../helpers/generateId'
 interface AddTaskModalProps {
 	tasks: ITask[]
 	setTasks: (tasks: ITask[]) => void
-    showPopUp: (isShown: boolean) => void
+	showPopUp: (isShown: boolean) => void
 }
 
-const AddTaskModal: FC<AddTaskModalProps> = ({ tasks, setTasks, showPopUp }) => {
+const AddTaskModal: FC<AddTaskModalProps> = ({
+	tasks,
+	setTasks,
+	showPopUp
+}) => {
 	const { isAddingTask, setIsAddingTask } = useModalContext()
 
 	const params = useParams()
@@ -43,7 +47,7 @@ const AddTaskModal: FC<AddTaskModalProps> = ({ tasks, setTasks, showPopUp }) => 
 	}
 
 	function handleSave() {
-        showPopUp(true)
+		showPopUp(true)
 		let task = {
 			...newTask,
 			id: generateTaskId(tasks)
