@@ -16,7 +16,7 @@ import { ITask } from '../../interfaces'
 import AddUserModal from '../modal/user/AddUserModal'
 import PopUpNotification from '../modal/pop-up/PopUpNotification'
 import { CSSTransition } from 'react-transition-group'
-import '../List.css'
+import '../../styles/List.css'
 
 const UserListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])

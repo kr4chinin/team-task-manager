@@ -9,6 +9,7 @@ import TaskModal from '../modal/task/TaskModal'
 import AddTaskModal from '../modal/task/AddTaskModal'
 import PopUpNotification from '../modal/pop-up/PopUpNotification'
 import { CSSTransition } from 'react-transition-group'
+import '../../styles/List.css'
 
 type TasksParams = {
 	id: string

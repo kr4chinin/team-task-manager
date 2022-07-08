@@ -10,4 +10,9 @@
 	border-radius: 0.6em;
 	border: transparent;
 	cursor: pointer;
+	transition: 400ms;
+}
+
+.action-btn:hover {
+	transform: translateY(3px);
 }

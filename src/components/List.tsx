@@ -1,5 +1,5 @@
 import React from 'react'
-import './List.css'
+import '../styles/List.css'
 import {
 	TransitionGroup,
 } from 'react-transition-group';

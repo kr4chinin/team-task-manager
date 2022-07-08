@@ -6,7 +6,7 @@ const Navbar = () => {
 		<nav className={cl.container}>
 			<Link to="/">📝 Team Task Manager</Link>
 			<div className={cl.links}>
-				<Link to="/" id={cl['first-link']}>
+				<Link to="/">
 					📊 Users List
 				</Link>
 				<Link to="info">ℹ️ Information</Link>

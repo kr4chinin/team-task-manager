@@ -11,6 +11,11 @@
 	justify-content: space-between;
 	align-items: center;
 	cursor: pointer;
+	transition: 500ms;
+}
+
+.container:hover {
+	transform: translateX(20px);
 }
 
 .avatar {

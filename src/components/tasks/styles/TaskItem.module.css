@@ -12,6 +12,11 @@
 	align-items: center;
 	font-weight: bold;
 	cursor: pointer;
+	transition: 500ms;
+}
+
+.container:hover {
+	transform: translateX(20px);
 }
 
 #indicator {
