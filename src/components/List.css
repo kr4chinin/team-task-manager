@@ -1,0 +1,45 @@
+/* Users CSS Transition Group */
+
+.users-enter {
+	opacity: 0;
+	transform: translateX(-150px);
+}
+
+.users-enter-active {
+	opacity: 1;
+	transform: translateX(0);
+	transition: all 600ms ease-out;
+}
+
+.users-exit {
+	opacity: 1;
+}
+
+.users-exit-active {
+	transform: translateX(150px);
+	opacity: 0;
+	transition: all 600ms;
+}
+
+/* Tasks CSS Transition Group */
+
+.tasks-enter {
+	opacity: 0;
+	transform: translateX(-150px);
+}
+
+.tasks-enter-active {
+	opacity: 1;
+	transform: translateX(0);
+	transition: all 600ms ease-out;
+}
+
+.tasks-exit {
+	opacity: 1;
+}
+
+.tasks-exit-active {
+	transform: translateX(150px);
+	opacity: 0;
+	transition: all 600ms;
+}

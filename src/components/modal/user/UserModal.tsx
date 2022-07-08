@@ -142,7 +142,7 @@ const UserModal: FC<UserModalProps> = ({
 								/>
 							)}
 							{!isEditing ? (
-								<p id="user-email">e-mail: {user?.email}</p>
+								<p id="user-email">{user?.email ? `e-mail: ${user?.email}` : ''}</p>
 							) : (
 								<input
 									className="edit-email-input"

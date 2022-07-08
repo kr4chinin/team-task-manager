@@ -3,7 +3,7 @@ import { ITask, IUser } from "../interfaces"
 export const generateUserId = (users: IUser[], showMaxWarning: (isWarning: boolean) => void) => {
 
     let counter = 0
-    for (let i = 10; i < 500; i++) {
+    for (let i = 11; i < 500; i++) {
         for (let v of users) {
             if (i === v.id) {
                 counter = 0

@@ -15,6 +15,8 @@ import {
 import { ITask } from '../../interfaces'
 import AddUserModal from '../modal/user/AddUserModal'
 import PopUpNotification from '../modal/pop-up/PopUpNotification'
+import { CSSTransition } from 'react-transition-group'
+import '../List.css'
 
 const UserListPage: FC = () => {
 	const [tasks, setTasks] = useState<ITask[]>([])
@@ -26,7 +28,7 @@ const UserListPage: FC = () => {
 
 	let addTimeoutId = useRef<any>()
 	let deleteTimeoutId = useRef<any>()
-  
+
 	useEffect(() => {
 		if (localStorage.getItem('tasks') === null) {
 			executeTasks()
@@ -123,7 +125,7 @@ const UserListPage: FC = () => {
 				isOpen={showAddUserPopUp}
 				setIsOpen={setShowAddUserPopUp}
 				handlePopUp={handleAddPopUp}
-				color="#2aa92a"
+				color="#2d9f32"
 			/>
 			<PopUpNotification
 				title="⛔️ User was successfully deleted!"
@@ -170,17 +172,20 @@ const UserListPage: FC = () => {
 			<List
 				items={sortedUsers}
 				renderItem={(user: IUser) => (
-					<div onClick={() => handleOpenModal(user.id)} key={user.id}>
-						<UserItem
-							user={user}
-							filter={filter}
-							numberOfTasks={getNumberOfTasks(user.id, calcTasks)}
-							numberOfCompletedTasks={getNumberOfCompletedTasks(
-								user.id,
-								calcTasks
-							)}
-						/>
-					</div>
+					<CSSTransition key={user.id} timeout={600} classNames='users'>
+						<div onClick={() => handleOpenModal(user.id)} key={user.id}>
+							<UserItem
+								user={user}
+								filter={filter}
+								numberOfTasks={getNumberOfTasks(user.id, calcTasks)}
+								numberOfCompletedTasks={getNumberOfCompletedTasks(
+									user.id,
+									calcTasks
+								)}
+							/>
+						</div>
+					</CSSTransition>
+
 				)}
 			/>
 		</>

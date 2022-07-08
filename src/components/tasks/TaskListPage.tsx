@@ -8,6 +8,7 @@ import { useModalContext } from '../../context/ModalContext'
 import TaskModal from '../modal/task/TaskModal'
 import AddTaskModal from '../modal/task/AddTaskModal'
 import PopUpNotification from '../modal/pop-up/PopUpNotification'
+import { CSSTransition } from 'react-transition-group'
 
 type TasksParams = {
 	id: string
@@ -54,7 +55,7 @@ const TaskListPage: FC = () => {
 	const { setIsAddingTask } = useModalContext()
 
 	let addTimeoutId = useRef<any>()
-	let deleteTimeoutId= useRef<any>()
+	let deleteTimeoutId = useRef<any>()
 	let completeTimeoutId = useRef<any>()
 
 	const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false)
@@ -98,7 +99,7 @@ const TaskListPage: FC = () => {
 				isOpen={showAddTaskPopUp}
 				setIsOpen={setShowAddTaskPopUp}
 				handlePopUp={handleAddPopUp}
-				color="#2aa92a"
+				color="#2d9f32"
 			/>
 			<PopUpNotification
 				title="⛔️ Task was successfully deleted!"
@@ -123,7 +124,7 @@ const TaskListPage: FC = () => {
 			<ActionPanel
 				options={[
 					{ value: 'title', title: 'title' },
-					{ value: 'completed', title: 'completed' }
+					{ value: 'completed', title: 'completed first' }
 				]}
 				btnTitle="Add task"
 				items={localTasks}
@@ -135,16 +136,18 @@ const TaskListPage: FC = () => {
 			<List
 				items={sortedTasks}
 				renderItem={(task: ITask) => (
-					<div key={task.id} onClick={() => handleOpenModal(task.id)}>
-						<TaskItem
-							task={task}
-							filter={filter}
-							tasks={localTasks}
-							setTasks={setLocalTasks}
-							showPopUpDelete={setShowDeleteTaskPopUp}
-							showPopUpComplete={setShowCompleteTaskPopUp}
-						/>
-					</div>
+					<CSSTransition key={task.id} timeout={600} classNames='tasks'>
+						<div key={task.id} onClick={() => handleOpenModal(task.id)}>
+							<TaskItem
+								task={task}
+								filter={filter}
+								tasks={localTasks}
+								setTasks={setLocalTasks}
+								showPopUpDelete={setShowDeleteTaskPopUp}
+								showPopUpComplete={setShowCompleteTaskPopUp}
+							/>
+						</div>
+					</CSSTransition>
 				)}
 			/>
 		</>

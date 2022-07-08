@@ -1,13 +1,12 @@
 import { FC } from 'react'
-import { IUser } from '../../interfaces'
 import ActionBtn from '../btns/ActionBtn'
 import cl from './styles/MaxUsersError.module.css'
 
-interface MaxUsersError {
+interface MaxUsersErrorProps {
     setMaxUserWarning: (isWarning: boolean) => void
 }
 
-const MaxUsersError: FC<MaxUsersError> = ({ setMaxUserWarning }) => {
+const MaxUsersError: FC<MaxUsersErrorProps> = ({ setMaxUserWarning }) => {
 
     function handleClearStorage() {
         setMaxUserWarning(false)

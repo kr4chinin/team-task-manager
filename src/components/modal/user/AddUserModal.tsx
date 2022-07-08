@@ -56,11 +56,11 @@ const AddUserModal: FC<AddUserModalProps> = ({
 		clearInterval(timeoutId)
 		if (+(localStorage.getItem('id') as string) === 500) {
 			setMaxUsersWarning(true)
-			return 
+			return
 		}
 		let user = {
 			...newUser,
-			id: generateUserId(users ,setMaxUsersWarning)
+			id: generateUserId(users, setMaxUsersWarning)
 		}
 		setUsers([user, ...users])
 		setIsAddingUser(false)
@@ -86,7 +86,7 @@ const AddUserModal: FC<AddUserModalProps> = ({
 	if (maxUsersWarning) {
 		return (
 			<MaxUsersError setMaxUserWarning={setMaxUsersWarning} />
-		) 
+		)
 	}
 
 	return createPortal(
@@ -100,7 +100,7 @@ const AddUserModal: FC<AddUserModalProps> = ({
 				>
 					{isGenerated ? (
 						<img
-							id="new-avatar"
+							id='generated-avatar'
 							alt="User avatar"
 							src={
 								newUser
@@ -117,20 +117,18 @@ const AddUserModal: FC<AddUserModalProps> = ({
 					)}
 
 					<div className="add-user-info-container">
-						<div>
-							<input
-								placeholder="Enter name..."
-								className="add-name-input"
-								value={newUser.name}
-								onChange={handleNameChange}
-							/>
-							<input
-								placeholder="Enter email..."
-								className="add-email-input"
-								value={newUser.email}
-								onChange={handleEmailChange}
-							/>
-						</div>
+						<input
+							placeholder="Enter name..."
+							className="add-name-input"
+							value={newUser.name}
+							onChange={handleNameChange}
+						/>
+						<input
+							placeholder="Enter email..."
+							className="add-email-input"
+							value={newUser.email}
+							onChange={handleEmailChange}
+						/>
 					</div>
 				</div>
 
