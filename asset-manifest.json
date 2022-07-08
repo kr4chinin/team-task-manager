@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.b8162bf6.css",
-    "main.js": "/static/js/main.ee243c79.js",
-    "static/media/ComicNeue-Regular.ttf": "/static/media/ComicNeue-Regular.f6e8f457de11c548d697.ttf",
-    "static/media/ABeeZee-Regular.ttf": "/static/media/ABeeZee-Regular.567c41f153027117352b.ttf",
-    "index.html": "/index.html",
-    "main.b8162bf6.css.map": "/static/css/main.b8162bf6.css.map",
-    "main.ee243c79.js.map": "/static/js/main.ee243c79.js.map"
+    "main.css": "/team-task-manager/static/css/main.0d163c3b.css",
+    "main.js": "/team-task-manager/static/js/main.3aaf335a.js",
+    "static/media/ComicNeue-Regular.ttf": "/team-task-manager/static/media/ComicNeue-Regular.f6e8f457de11c548d697.ttf",
+    "static/media/ABeeZee-Regular.ttf": "/team-task-manager/static/media/ABeeZee-Regular.567c41f153027117352b.ttf",
+    "index.html": "/team-task-manager/index.html",
+    "main.0d163c3b.css.map": "/team-task-manager/static/css/main.0d163c3b.css.map",
+    "main.3aaf335a.js.map": "/team-task-manager/static/js/main.3aaf335a.js.map"
   },
   "entrypoints": [
-    "static/css/main.b8162bf6.css",
-    "static/js/main.ee243c79.js"
+    "static/css/main.0d163c3b.css",
+    "static/js/main.3aaf335a.js"
   ]
 }
