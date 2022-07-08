@@ -48,8 +48,12 @@ const TaskListPage: FC = () => {
 	}, [params.id])
 
 	useEffect(() => {
-		let globalTasksWithoutCurrentTasks = globalTasks.filter(t => String(t.userId) !== params.id)
-		let updatedGlobalTasks = globalTasksWithoutCurrentTasks.concat(...sortedTasks)
+		let globalTasksWithoutCurrentTasks = globalTasks.filter(
+			t => String(t.userId) !== params.id
+		)
+		let updatedGlobalTasks = globalTasksWithoutCurrentTasks.concat(
+			...sortedTasks
+		)
 		localStorage.setItem('tasks', JSON.stringify(updatedGlobalTasks))
 	}, [sortedTasks, params.id, localTasks, globalTasks])
 
