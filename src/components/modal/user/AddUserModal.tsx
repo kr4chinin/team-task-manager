@@ -109,8 +109,8 @@ const AddUserModal: FC<AddUserModalProps> = ({
 							}
 						/>
 					) : (
-						<div className="generate-avatar">
-							<p id="generate-avatar-title" onClick={handleGeneratePicture}>
+						<div className="generate-avatar" onClick={handleGeneratePicture}>
+							<p id="generate-avatar-title">
 								👤 Click to generate a profile picture!
 							</p>
 						</div>

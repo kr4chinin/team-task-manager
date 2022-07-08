@@ -5,13 +5,15 @@ import { useModalContext } from '../../../context/ModalContext'
 import { calculateTasks } from '../../../helpers/calculateTasks'
 import { saveWithEnter } from '../../../helpers/saveWithEnter'
 import { useEscape } from '../../../hooks/useEscape'
-import { IUser } from '../../../interfaces'
+import { ITask, IUser } from '../../../interfaces'
 import ActionBtn from '../../btns/ActionBtn'
 import Modal from '../modal-template/Modal'
 import './styles/UserModal.css'
 
 interface UserModalProps {
 	user: IUser
+	tasks: ITask[]
+	setTasks: (tasks: ITask[]) => void
 	numberOfTasks: number
 	numberOfCompletedTasks: number
 	users: IUser[]
@@ -21,6 +23,8 @@ interface UserModalProps {
 
 const UserModal: FC<UserModalProps> = ({
 	user,
+	tasks,
+	setTasks,
 	numberOfCompletedTasks,
 	numberOfTasks,
 	users,
@@ -57,6 +61,9 @@ const UserModal: FC<UserModalProps> = ({
 	function handleDelete() {
 		showPopUp(true)
 		setUsers(users.filter(u => u.id !== user.id))
+		setTasks(tasks.filter(t => 
+			t.userId !== user.id
+		))
 		setIsUserOpen(false)
 	}
 

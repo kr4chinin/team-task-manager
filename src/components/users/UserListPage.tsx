@@ -139,6 +139,8 @@ const UserListPage: FC = () => {
 				timeoutId={addTimeoutId.current}
 			/>
 			<UserModal
+				tasks={tasks}
+				setTasks={setTasks}
 				users={users}
 				setUsers={setUsers}
 				user={currentUser}
