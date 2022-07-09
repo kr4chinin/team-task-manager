@@ -28,7 +28,8 @@ export const generateTaskId = (tasks: ITask[]) => {
 	for (let i = 0; i < 5000; i++) {
 		for (let v of tasks) {
 			if (i === v.id) {
-				continue
+				counter = 0
+				break
 			}
 			counter = i
 		}
