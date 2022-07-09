@@ -4,7 +4,7 @@ import Modal from '../modal-template/Modal'
 import './styles/AddUserModal.css'
 import './styles/UserModal.css'
 import ActionBtn from '../../btns/ActionBtn'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { IUser } from '../../../interfaces'
 import { useEscape } from '../../../hooks/useEscape'
 import { generateUserId } from '../../../helpers/generateId'
@@ -31,6 +31,15 @@ const AddUserModal: FC<AddUserModalProps> = ({
 
 	const [newUser, setNewUser] = useState(initialValue)
 
+	// generate newUser id when modal is opened
+	useEffect(() => {
+		if (isAddingUser) {
+			setNewUser(prev => {
+				return { ...prev, id: generateUserId(users, setMaxUsersWarning) }
+			})
+		}
+	}, [isAddingUser, users])
+
 	function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
 		setNewUser({ ...newUser, name: e.target.value })
 	}
@@ -51,15 +60,7 @@ const AddUserModal: FC<AddUserModalProps> = ({
 	const [maxUsersWarning, setMaxUsersWarning] = useState(false)
 
 	function handleSave() {
-		if (+(localStorage.getItem('id') as string) === 500) {
-			setMaxUsersWarning(true)
-			return
-		}
-		let user = {
-			...newUser,
-			id: generateUserId(users, setMaxUsersWarning)
-		}
-		setUsers([user, ...users])
+		setUsers([newUser, ...users])
 		setIsAddingUser(false)
 		setNewUser(initialValue)
 		setIsGenerated(false)
@@ -98,9 +99,7 @@ const AddUserModal: FC<AddUserModalProps> = ({
 							className="generated-avatar"
 							alt="User avatar"
 							src={
-								newUser
-									? `https://picsum.photos/id/${users.length + 11}/200`
-									: ''
+								newUser ? `https://picsum.photos/id/${newUser.id + 10}/200` : ''
 							}
 						/>
 					) : (

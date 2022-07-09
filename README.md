@@ -14,6 +14,7 @@ For now - app only **fully optimized** for Chrome and Firefox browsers, some sma
   * You can sort users and task by choosing options in selector 
   * You can input string and search it in the user name or task title, overlaps will be highlightened
 * Smooth animations and transitions
+* Minor handy features like closing the modals with *"Escape"* button and saving changes by pressing *"Enter"*
 * Common errors are handled so nothing will break
 
 For more information you can open this app on GitHub Pages [here](https://kr4chinin.github.io/team-task-manager/ "here") and go to **information page** in the navigation bar.
