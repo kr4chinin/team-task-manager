@@ -17,7 +17,7 @@ For now - app only **fully optimized** for Chrome and Firefox browsers, some sma
 * Minor handy features like closing the modals with *"Escape"* button and saving changes by pressing *"Enter"*
 * Common errors are handled so nothing will break
 
-For more information you can open this app on GitHub Pages [here](https://kr4chinin.github.io/team-task-manager/ "here") and go to **information page** in the navigation bar.
+For more information you can open this app on GitHub Pages [here](https://kr4chinin.github.io/team-task-manager/ "here") and go to the **information page** in the navigation bar.
 
 This app allows you to create team members, give them various tasks and track each member efficiency. 
 
