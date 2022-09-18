@@ -2,6 +2,8 @@
 
 ## Introduction
 
+‼️ Caution: [Pisum photos](https://picsum.photos) are currently unavailable for Russian users. Make sure to use **VPN** in order to see and generate profile pictures in this app.
+
 For now - app only **fully optimized** for Chrome and Firefox browsers, some small visual problems may occur in Safari or Internet Explorer!
 
 ### Functionality
